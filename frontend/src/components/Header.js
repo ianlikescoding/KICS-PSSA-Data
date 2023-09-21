@@ -2,7 +2,7 @@ import "./Header.css"
 
 const Header = () => {
     return (
-        <div>
+        <div className="header-div">
             <img src="./logo.png" className="logo"></img>
         </div>
         
