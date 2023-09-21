@@ -1,9 +1,9 @@
 .logo{
     width:200px;
     height:auto;
-    position: absolute;
     top: 0;
     left: 0;
+    margin-right: 100%;
 }
 .header-div{
     padding-bottom: 50px;
