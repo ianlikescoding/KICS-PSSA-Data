@@ -9,8 +9,8 @@ function App() {
     <div className="App">
       <Header/>
       <div id='bar_chart1'></div>
-      <button onClick={() => generateBarChart('bar_chart1')}> Generate Chart</button>
-      <button onClick={() => GeneratePieGraph('pie_chart_1')}>Click Me</button>
+      <button onClick={() => generateBarChart('bar_chart1')} ><span>Generate Chart</span><i></i></button>
+      <button onClick={() => GeneratePieGraph('pie_chart_1')}><span>Button</span><i></i></button>
     </div>
   );
 }
