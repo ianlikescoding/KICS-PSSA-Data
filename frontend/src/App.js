@@ -1,7 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react";
 import Header from './components/Header';
-import CustomizedMenus from './components/DropDown'
 import { generatePieGraph, generateBarChart } from './generateChart';
 import complexedGrid from './components/ChartContainer';
 
