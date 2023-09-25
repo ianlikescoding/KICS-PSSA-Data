@@ -1,17 +1,30 @@
 import './App.css';
-import { GeneratePieGraph } from './generatePieGraph';
+import { useState, useEffect } from "react";
 import Header from './components/Header';
 import CustomizedMenus from './components/DropDown'
-import { generateBarChart } from './generateBarChart';
+import { generatePieGraph, generateBarChart } from './generateChart';
 
 function App() {
+  let allCharts = [];
+  const [data, setData] = useState();
+
+  setTimeout(() => {
+    setData("Make API call here")
+  }, 1000);
+
+  useEffect(() => {
+    if (data) {
+      generateBarChart(allCharts, 'bar_chart1');
+      generatePieGraph(allCharts, 'pie_chart1');
+    }
+  }, [data]);
+
   return (
     <div className="App">
       <Header/>
       <CustomizedMenus/>
       <div id='bar_chart1'></div>
-      <button onClick={() => generateBarChart('bar_chart1')}> Generate Chart</button>
-      <button onClick={() => GeneratePieGraph('pie_chart_1')}>Click Me</button>
+      <div id='pie_chart1'></div>
     </div>
   );
 }
