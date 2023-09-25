@@ -4,10 +4,11 @@ import CustomizedMenus from "./DropDown";
 import { generateBarChart, generatePieGraph } from "../generateChart";
 import "../components/ChartContainer.css";
 import Paper from "@mui/material/Paper";
+import { Container } from "@mui/material";
 
 export default function ComplexedGrid() {
   return (
-    <div>
+    <Container>
       <Paper
         sx={{
           p: 2,
@@ -40,6 +41,6 @@ export default function ComplexedGrid() {
           </Grid>
         </Grid>
       </Paper>
-    </div>
+    </Container>
   );
 }
