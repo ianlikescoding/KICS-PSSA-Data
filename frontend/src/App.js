@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import Header from './components/Header';
 import CustomizedMenus from './components/DropDown'
 import { generatePieGraph, generateBarChart } from './generateChart';
+import complexedGrid from './components/ChartContainer';
+
+
 
 function App() {
   let allCharts = [];
@@ -22,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <CustomizedMenus/>
+      {complexedGrid()}
       <div id='bar_chart1'></div>
       <div id='pie_chart1'></div>
     </div>
