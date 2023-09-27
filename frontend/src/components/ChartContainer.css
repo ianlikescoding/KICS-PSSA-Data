@@ -4,3 +4,9 @@
     height : 400px;
 
 }
+
+.more-chart-btn{
+    position:static;
+    right: 0;
+    bottom: 0;
+}

@@ -5,8 +5,10 @@ import { generateBarChart, generatePieGraph } from "../generateChart";
 import "../components/ChartContainer.css";
 import Paper from "@mui/material/Paper";
 import { Container } from "@mui/material";
+import { useState, useEffect } from "react";
 
-export default function ComplexedGrid() {
+export default function ComplexedGrid(allCharts) {
+  const [data, setData] = useState(); // will be used later
   return (
     <Container>
       <Paper
@@ -32,11 +34,22 @@ export default function ComplexedGrid() {
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs className="chart-container">
-                {/* {generateBarChart()} */}
-                This is where I want to insert a chart
+              <Container>
+                <Grid item xs className="chart-container">
+                  {useEffect(() => {
+                    if (data) {
+                      {
+                        generateBarChart(allCharts, "chart");
+                      }
+                    }
+                  })}
+                  This is where I want to insert a chart
+                </Grid>
+              </Container>
+              <Grid>PSSA</Grid> {/*horizontal axis label */}
+              <Grid className="more-chart-btn">
+              <button>Add More Chart</button>
               </Grid>
-              <Grid>PSSA {/* horizontal axis label */}</Grid>
             </Grid>
           </Grid>
         </Grid>
