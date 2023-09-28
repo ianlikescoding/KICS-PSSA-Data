@@ -12,6 +12,8 @@ public class CSVReader {
     }
 
     public void readExamData(){
+        DatabaseEngine db = new DatabaseEngine();
+        db.connect_db();
         while (scanner.hasNextLine()){
 
             /*
@@ -31,18 +33,23 @@ public class CSVReader {
              */
             //System.out.println(row[8]);
 
-            if (row[8].equals("School Total")){
+            // only retrieving data with school total that includes all students
+            if (row[8].equals("School Total") && row[7].equals("All Students")){
+                // cleaning data so we are only taking full data points
                 if(row.length >= 14){
                     Exam exam = new Exam(Integer.parseInt(row[1]), Integer.parseInt(row[2]), row[3], row[4], row[5], row[6],
                             Integer.parseInt(row[9]), Float.parseFloat(row[10]), Float.parseFloat(row[11]),
                             Float.parseFloat(row[12]), Float.parseFloat(row[13]));
 
-                    System.out.println(exam.getSchoolNumber() + " " + exam.numberScored);
+                    //System.out.println(exam.getSchoolNumber() + " " + exam.numberScored);
+
+                    db.insert_exam(exam);
                 }
             }
-
-
         }
+        db.release_db();
+
+        db.close_app();
     }
 
 }

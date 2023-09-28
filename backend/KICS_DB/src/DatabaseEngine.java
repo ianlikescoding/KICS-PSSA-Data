@@ -135,7 +135,7 @@ public class DatabaseEngine {
     public void insert_exam(Exam exam){
 
         try {
-            String sql = "insert into exam " +
+            String sql = "insert into Exam " +
                     "values (" + exam.AUN + ", "  + exam.schoolNumber + ", " + "'" + exam.county + "', '" + exam.districtName
                     + "', '" + exam.schoolName + "', '" + exam.subject + "', " + exam.numberScored + ", " + exam.pAdvanced
                     + ", " + exam.pProficient + ", " + exam.pBasic + ", " + exam.pBelowBasic
@@ -153,5 +153,6 @@ public class DatabaseEngine {
         }
 
     }
+
 
 }
