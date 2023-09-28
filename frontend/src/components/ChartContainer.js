@@ -47,8 +47,10 @@ export default function ComplexedGrid(allCharts) {
                 </Grid>
               </Container>
               <Grid>PSSA</Grid> {/*horizontal axis label */}
-              <Grid className="more-chart-btn">
-              <button>Add More Chart</button>
+              <Grid>
+                <button className="more-chart-btn">
+                  <span>Add More Chart</span>
+                </button>
               </Grid>
             </Grid>
           </Grid>

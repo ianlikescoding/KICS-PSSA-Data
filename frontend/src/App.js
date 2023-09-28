@@ -6,18 +6,18 @@ import complexedGrid from "./components/ChartContainer";
 
 function App() {
   let allCharts = [];
-  // const [data, setData] = useState();
+  const [data, setData] = useState();
 
-  // setTimeout(() => {
-  //   setData("Make API call here");
-  // }, 1000);
+  setTimeout(() => {
+    setData("Make API call here");
+  }, 1000);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     generateBarChart(allCharts, "bar_chart1");
-  //     generatePieGraph(allCharts, "pie_chart1");
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data) {
+      generateBarChart(allCharts, "bar_chart1");
+      generatePieGraph(allCharts, "pie_chart1");
+    }
+  }, [data]);
 
   return (
     <div className="App">
