@@ -12,12 +12,12 @@ function App() {
     setData("Make API call here");
   }, 1000);
 
-  useEffect(() => {
-    if (data) {
-      generateBarChart(allCharts, "bar_chart1");
-      generatePieGraph(allCharts, "pie_chart1");
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     generateBarChart(allCharts, "bar_chart1");
+  //     generatePieGraph(allCharts, "pie_chart1");
+  //   }
+  // }, [data]);
 
   return (
     <div className="App">

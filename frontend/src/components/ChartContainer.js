@@ -38,9 +38,7 @@ export default function ComplexedGrid(allCharts) {
                 <Grid item xs className="chart-container">
                   {useEffect(() => {
                     if (data) {
-                      {
-                        generateBarChart(allCharts, "chart");
-                      }
+                      {generateBarChart(allCharts, "chart");}
                     }
                   })}
                   This is where I want to insert a chart
