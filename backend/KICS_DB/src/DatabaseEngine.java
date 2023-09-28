@@ -16,6 +16,7 @@ public class DatabaseEngine {
     // base sql statement
     Statement st;
 
+    // connection
     JSch jsch;
 
     Session session;
@@ -129,6 +130,28 @@ public class DatabaseEngine {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void insert_exam(Exam exam){
+
+        try {
+            String sql = "insert into exam " +
+                    "values (" + exam.AUN + ", "  + exam.schoolNumber + ", " + "'" + exam.county + "', '" + exam.districtName
+                    + "', '" + exam.schoolName + "', '" + exam.subject + "', " + exam.numberScored + ", " + exam.pAdvanced
+                    + ", " + exam.pProficient + ", " + exam.pBasic + ", " + exam.pBelowBasic
+                    + ");";
+            int update = st.executeUpdate(sql);
+
+            if(update >= 1){
+                System.out.println("Inserted data");
+            }
+            else{
+                System.out.println("Failed to insert data");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

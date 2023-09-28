@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args){
         try {
+            /*
             DatabaseEngine db = new DatabaseEngine();
             db.connect_db();
 
@@ -10,6 +11,11 @@ public class Main {
             db.release_db();
 
             db.close_app();
+
+             */
+
+            CSVReader examReader = new CSVReader("exam.csv");
+            examReader.readExamData();
         }
         catch (Exception e){
             e.printStackTrace();
