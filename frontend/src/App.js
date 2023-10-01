@@ -2,7 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import { generatePieGraph, generateBarChart } from "./generateChart";
-import complexedGrid from "./components/ChartContainer";
+import ComplexedGrid from "./components/ChartContainer";
 
 function App() {
   let allCharts = [];
@@ -12,19 +12,21 @@ function App() {
     setData("Make API call here");
   }, 1000);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     generateBarChart(allCharts, "bar_chart1");
-  //     generatePieGraph(allCharts, "pie_chart1");
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (document.getElementById("bar_chart1")) {
+      generateBarChart(allCharts, "bar_chart1");
+    }
+
+    if (document.getElementById("pie_chart1")) {
+      generatePieGraph(allCharts, "pie_chart1");
+    }
+  }, [data]);
 
   return (
     <div className="App">
       <Header />
-      {complexedGrid(allCharts)}
-      <div id="bar_chart1"></div>
-      <div id="pie_chart1"></div>
+      <ComplexedGrid allCharts={allCharts}/>
+      
     </div>
   );
 }

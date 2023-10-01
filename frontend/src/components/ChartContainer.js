@@ -36,12 +36,10 @@ export default function ComplexedGrid(allCharts) {
             <Grid item xs container direction="column" spacing={2}>
               <Container>
                 <Grid item xs className="chart-container">
-                  {useEffect(() => {
-                    if (data) {
-                      {generateBarChart(allCharts, "chart");}
-                    }
-                  })}
-                  This is where I want to insert a chart
+                <div id="bar_chart1"></div>
+                </Grid>
+                <Grid item xs className="chart-container">
+                <div id="pie_chart1"></div>
                 </Grid>
               </Container>
               <Grid>PSSA</Grid> {/*horizontal axis label */}
