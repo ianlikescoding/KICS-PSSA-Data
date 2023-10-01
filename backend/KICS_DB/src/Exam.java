@@ -28,6 +28,12 @@ public class Exam {
         this.pBelowBasic = pBelowBasic;
     }
 
+    void print_exam(){
+        System.out.print(AUN + " " + schoolNumber + " " + county + " " + districtName + " " + schoolName
+        + " " + subject + " " + numberScored + " " + pAdvanced + " " + pProficient + " " + pBasic + " "
+        + pBelowBasic);
+    }
+
     int getAUN(){
         return AUN;
     }

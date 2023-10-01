@@ -41,7 +41,7 @@ public class CSVReader {
                             Integer.parseInt(row[9]), Float.parseFloat(row[10]), Float.parseFloat(row[11]),
                             Float.parseFloat(row[12]), Float.parseFloat(row[13]));
 
-                    //System.out.println(exam.getSchoolNumber() + " " + exam.numberScored);
+                    //System.out.println(exam.county + " " + exam.getSchoolNumber() + " " + exam.schoolName + " " + exam.subject + " " + exam.numberScored + " ");
 
                     db.insert_exam(exam);
                 }

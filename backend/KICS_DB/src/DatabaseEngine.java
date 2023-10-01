@@ -1,9 +1,12 @@
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+import com.mysql.jdbc.PreparedStatement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DatabaseEngine {
     static int lport;
@@ -75,21 +78,6 @@ public class DatabaseEngine {
         }
     }
 
-    public void release_db(){
-        try {
-            if (st != null) { st.close(); }
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-        try {
-            if (con != null) { con.close(); }
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
     public void close_app(){
         try {
             session.disconnect();
@@ -133,7 +121,6 @@ public class DatabaseEngine {
     }
 
     public void insert_exam(Exam exam){
-
         try {
             String sql = "insert into Exam " +
                     "values (" + exam.AUN + ", "  + exam.schoolNumber + ", " + "'" + exam.county + "', '" + exam.districtName
@@ -151,8 +138,55 @@ public class DatabaseEngine {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public ArrayList<Exam> select_star_exam(){
+        ArrayList<Exam> exams = new ArrayList<Exam>();
+        try {
+
+            String sql = "select * from Exam;";
+
+            ResultSet rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                int AUN = rs.getInt("AUN");
+                int schoolID = rs.getInt("School_ID");
+                String county = rs.getString("County");
+                String districtName = rs.getString("District_Name");
+                String schoolName = rs.getString("School_Name");
+                String subject = rs.getString("Subject");
+                int numberScored = rs.getInt("Number_Scored");
+                float pAdvanced = rs.getFloat("P_Advanced");
+                float pProficient = rs.getFloat("P_Proficient");
+                float pBasic = rs.getFloat("P_Basic");
+                float pBelowBasic = rs.getFloat("P_Below_Basic");
+
+                Exam exam = new Exam(AUN, schoolID, county, districtName, schoolName, subject,
+                        numberScored, pAdvanced, pProficient, pBasic, pBelowBasic);
+
+
+                exams.add(exam);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exams;
     }
 
 
+
+    public void release_db(){
+        try {
+            if (st != null) { st.close(); }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        try {
+            if (con != null) { con.close(); }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
