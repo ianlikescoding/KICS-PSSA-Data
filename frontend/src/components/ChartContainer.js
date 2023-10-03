@@ -1,11 +1,9 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import CustomizedMenus from "./DropDown";
-import { generateBarChart, generatePieGraph } from "../generateChart";
 import "../components/ChartContainer.css";
 import Paper from "@mui/material/Paper";
 import { Container } from "@mui/material";
-import { useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -14,7 +12,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from "recharts";
 
 export default function ComplexedGrid() {
@@ -81,7 +78,7 @@ export default function ComplexedGrid() {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Container>
-                <Grid item xs className="chart-container">
+                <Grid item xs className="chart-container" alignItems="center" sx={{display:'grid'}}>
                   <BarChart width={730} height={250} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
@@ -92,15 +89,8 @@ export default function ComplexedGrid() {
                     <Bar dataKey="uv" fill="#82ca9d" />
                   </BarChart>
                 </Grid>
-                <Grid item xs className="chart-container">
-                  <div id="pie_chart1"></div>
-                </Grid>
               </Container>
-              <Grid>PSSA</Grid> {/*horizontal axis label */}
               <Grid>
-                <button className="more-chart-btn">
-                  <span>Add More Chart</span>
-                </button>
               </Grid>
             </Grid>
           </Grid>
