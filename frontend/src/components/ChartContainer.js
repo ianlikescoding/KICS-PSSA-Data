@@ -12,6 +12,8 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  PieChart,
+  Pie,
 } from "recharts";
 
 export default function ComplexedGrid() {
@@ -52,6 +54,16 @@ export default function ComplexedGrid() {
       pv: 4300,
     },
   ];
+
+  const data01 = [
+    { name: "Group A", value: 400 },
+    { name: "Group B", value: 300 },
+    { name: "Group C", value: 300 },
+    { name: "Group D", value: 200 },
+    { name: "Group E", value: 278 },
+    { name: "Group F", value: 189 },
+  ];
+
   return (
     <Container>
       <Paper
@@ -59,7 +71,6 @@ export default function ComplexedGrid() {
           p: 2,
           margin: "auto",
           width: 1000,
-          height: 500,
           flexGrow: 1,
           backgroundColor: (theme) =>
             theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -78,7 +89,13 @@ export default function ComplexedGrid() {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Container>
-                <Grid item xs className="chart-container" alignItems="center" sx={{display:'grid'}}>
+                <Grid
+                  item
+                  xs
+                  className="chart-container"
+                  alignItems="center"
+                  sx={{ display: "grid" }}
+                >
                   <BarChart width={730} height={250} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
@@ -90,10 +107,37 @@ export default function ComplexedGrid() {
                   </BarChart>
                 </Grid>
               </Container>
-              <Grid>
-              </Grid>
             </Grid>
           </Grid>
+        </Grid>
+      </Paper>
+      <Paper
+        sx={{
+          p: 2,
+          margin: "auto",
+          width: 1000,
+          flexGrow: 1,
+          marginTop: 5,
+          marginBottom: 10,
+          justifyContent: "center",
+          display: "grid",
+          backgroundColor: (theme) =>
+            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+        }}
+      >
+        <Grid>
+          <PieChart width={270} height={300}>
+            <Pie
+              dataKey="value"
+              isAnimationActive={false}
+              data={data01}
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              fill="#8884d8"
+              label
+            />
+          </PieChart>
         </Grid>
       </Paper>
     </Container>

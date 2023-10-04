@@ -3,5 +3,6 @@
     height:auto;
     top: 0;
     left: 0;
-    margin-right: 100%;
+    justify-content: left;
+    display:grid;
 }

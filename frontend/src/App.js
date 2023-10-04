@@ -1,7 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
-import { generatePieGraph, generateBarChart } from "./generateChart";
 import ComplexedGrid from "./components/ChartContainer";
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
     <div className="App">
       <Header />
       <ComplexedGrid />
-      
     </div>
   );
 }
