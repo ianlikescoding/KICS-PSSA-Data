@@ -26,14 +26,20 @@ if (ssh.connect(sshTunnelConfig)) {
 };
 
 ssh.on('ready', () => {
+    console.log("ready")
     ssh.forwardOut(
         srcIP= localhost,
         srcPort= mysqlConfig.timeout, 
         dstIP= localhost, 
         dstPort= mysqlConfig.port,
         (err, stream) => {
-            if (err) console.log(err);
+            console.log("Attemping forwardout...")
+            if (err) {
+                console.log ("ERROR!");
+            console.log(err);
+            }
             const conn =  mysql.createConnection(mysqlConfig);
+            console.log("Attempting connection...")
             conn.connect(function (err) {
                     if(err){
                         console.log(err);
