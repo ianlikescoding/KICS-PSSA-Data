@@ -1,7 +1,7 @@
 const express = require('express');
-const db = require('./config/config.js')
+//const db = require('./config/config.js')
 const cors = require('cors')
-
+const connection = require('./config/dbconfig.js')
 const app = express();
 const  PORT = 3002;
 app.use(cors());
@@ -9,6 +9,7 @@ app.use(express.json())
 
 //connectDB();
 
+console.log(connection)
 
 // Route to get all posts
 app.get("/api/get", (req,res)=>{
