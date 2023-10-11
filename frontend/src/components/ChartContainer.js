@@ -153,7 +153,7 @@ export default function ComplexedGrid() {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="pv" fill="#8884d8" />
+                  <Bar dataKey="pv" fill="#0088FE" />
                   <Bar dataKey="uv" fill="#82ca9d" />
                 </BarChart>
                 </Box>
@@ -172,8 +172,8 @@ export default function ComplexedGrid() {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                <Line type="monotone" dataKey="pv" stroke="#FFBB28" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="uv" stroke="#00C49F" />
               </LineChart>
             </Box>
           </Stack>
@@ -205,7 +205,7 @@ export default function ComplexedGrid() {
                 cx="50%"
                 cy="50%"
                 outerRadius={80}
-                fill="#8884d8"
+                fill="pink"
                 label
               />
             </PieChart>
