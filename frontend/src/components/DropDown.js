@@ -58,6 +58,11 @@ export default function CustomizedMenus(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const [currOption, setCurrOption] = React.useState(options[0]);
+  function changeDataSet(optionName) {
+    setCurrOption(optionName)
+    handleClose()
+  }
 
   return (
     <div>
@@ -71,7 +76,7 @@ export default function CustomizedMenus(props) {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        <b>Choose Data</b>
+        <b>{currOption}</b>
       </Button>
       <StyledMenu
         id="demo-customized-menu"
@@ -83,7 +88,7 @@ export default function CustomizedMenus(props) {
         onClose={handleClose}
       >
         {options?.map(el => {
-         return <MenuItem onClick={handleClose} disableRipple key={el}>
+         return <MenuItem onClick={() => changeDataSet(el)} disableRipple key={el}>
           {el}
         </MenuItem>
         })}

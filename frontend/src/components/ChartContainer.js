@@ -6,8 +6,6 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
 import {
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -97,7 +95,7 @@ export default function ComplexedGrid() {
         <div className="custom-tooltip" backgroundColor="white">
           <h3>{`${payload[0].payload.name}`}</h3>
           <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
-          <p className="gradrate-label">{`Graduation Rate : ${payload[1].value}%`}</p>
+          <p className="gradrate-label">{`Graduation Rate : $${payload[1].value}M`}</p>
         </div>
       );
     }
@@ -142,7 +140,7 @@ export default function ComplexedGrid() {
                     type="number"
                     dataKey="y"
                     name="graduation_rate"
-                    unit="%"
+                    unit="M"
                   />
                   <Tooltip
                     cursor={{ strokeDasharray: "3 3" }}
