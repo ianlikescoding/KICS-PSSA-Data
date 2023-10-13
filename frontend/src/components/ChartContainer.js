@@ -116,7 +116,7 @@ export default function ComplexedGrid() {
         }}
       >
         <Stack spacing={4}>
-          <Stack direction="row" spacing={2} alignItems="center">
+          <Stack direction="row" spacing={2} alignItems="center" justifyContent={"center"}>
             <CustomizedMenus
               options={[
                 "Total Expenditures",

@@ -75,6 +75,7 @@ export default function CustomizedMenus(props) {
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
+        sx={{width:200}}
       >
         <b>{currOption}</b>
       </Button>
