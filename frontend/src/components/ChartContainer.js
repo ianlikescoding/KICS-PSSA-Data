@@ -25,49 +25,47 @@ import {
 export default function ComplexedGrid() {
   const data = [
     {
-      name: "School A",
-      uv: 4000,
-      pv: 2400,
+      pssa_score: 1.65,
+      Y1: 4,
+      Y2: 3,
     },
     {
-      name: "School B",
-      uv: 3000,
-      pv: 1398,
+      pssa_score: 1.7,
+      Y1: 8,
+      Y2: 8,
     },
     {
-      name: "School C",
-      uv: 2000,
-      pv: 9800,
+      pssa_score: 1.9,
+      Y1: 7,
+      Y2: 9,
     },
     {
-      name: "School D",
-      uv: 2780,
-      pv: 3908,
+      pssa_score: 1.9,
+      Y1: 13,
+      Y2: 14,
     },
     {
-      name: "School E",
-      uv: 1890,
-      pv: 4800,
+      pssa_score: 2.5,
+      Y1: 20,
+      Y2: 18,
     },
     {
-      name: "School F",
-      uv: 2390,
-      pv: 3800,
+      pssa_score: 3.2,
+      Y1: 16,
+      Y2: 18,
     },
     {
-      name: "School G",
-      uv: 3490,
-      pv: 4300,
-    },
+      pssa_score: 3.6,
+      Y1: 10,
+      Y2: 13,
+    }
   ];
 
   const data01 = [
-    { name: "Advanced", value: 400 },
-    { name: "Proficient", value: 300 },
-    { name: "Basic", value: 300 },
-    { name: "Below Basic", value: 200 },
-    { name: "Group E", value: 278 },
-    { name: "Group F", value: 189 },
+    { name: "Advanced", value: 40 },
+    { name: "Proficient", value: 30 },
+    { name: "Basic", value: 27 },
+    { name: "Below Basic", value: 3 },
   ];
 
   const data02 = [
@@ -97,10 +95,10 @@ export default function ComplexedGrid() {
       console.log("payload: ", payload)
       console.log("label: ", label)
       return (
-        <div className="custom-tooltip">
+        <div className="custom-tooltip" backgroundColor='white'>
           <h3>{`${payload[0].payload.name}`}</h3>
-          <p className="pssascore-label">{`${payload[0].name} : ${payload[0].value}`}</p>
-          <p className="gradrate-label">{`${payload[1].name} : ${payload[1].value}`}</p>
+          <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
+          <p className="gradrate-label">{`Graduation Rate : ${payload[1].value}%`}</p>
         </div>
       );
     }
@@ -122,7 +120,7 @@ export default function ComplexedGrid() {
       >
         <Stack spacing={4}>
         <Stack direction="row" spacing={2} alignItems="center">
-            <CustomizedMenus />
+            <CustomizedMenus options={["Total Expenditures", "Personal Income/Market Value per WADM"]}/>
             <Box>
               <h1>PSSA Score vs Financial Data</h1>
               <ResponsiveContainer width={730} height={300}>
@@ -144,36 +142,40 @@ export default function ComplexedGrid() {
             </Box>
           </Stack>
           <Stack direction="row" spacing={2} alignItems="center">
-            <CustomizedMenus />
+            <CustomizedMenus options={["Graduation Rate", "Dropout Rate", "Postsecondary Bound", "College Bound"]}/>
             <Box >
-            <h1>Visual B</h1>
-            <BarChart width={730} height={250} data={data}>
+              <h1>PSAA Score vs. Post-Graduate Data</h1>
+              <LineChart
+                  width={730}
+                  height={250}
+                  data={data}
+                  margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
+                  <XAxis dataKey="pssa_score" />
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="pv" fill="#0088FE" />
-                  <Bar dataKey="uv" fill="#82ca9d" />
-                </BarChart>
-                </Box>
+                  <Line type="monotone" dataKey="Y2" stroke="#0088FE" activeDot={{ r: 8 }} />
+                  <Line type="monotone" dataKey="Y1" stroke="#82ca9d" />
+              </LineChart>
+            </Box>
           </Stack>
           <Stack direction="row" spacing={2} alignItems="center">
-            <CustomizedMenus />
+            <CustomizedMenus options={["Literacy", "Enrollment by Gender", "Enrollment by Race", "Attendance", "Faculty Years of Service"]}/>
             <Box>
-              <h1>Visual C</h1>
+            <h1>PSSA Score vs Demographic Data</h1>
               <LineChart
                 width={730}
                 height={250}
                 data={data}
                 margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="pssa_score" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#FFBB28" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#00C49F" />
+                <Line type="monotone" dataKey="Y2" stroke="#FFBB28" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="Y1" stroke="#00C49F" />
               </LineChart>
             </Box>
           </Stack>
@@ -196,7 +198,7 @@ export default function ComplexedGrid() {
         <Box width="100%">
           <h1>PSSA Score Breakdown</h1>
           <Stack direction="row" spacing={10} alignItems="center">
-            <CustomizedMenus />
+            <CustomizedMenus options={["School A", "School B", "School C", "School D"]}/>
             <PieChart width={270} height={300}>
               <Pie
                 dataKey="value"
@@ -206,8 +208,9 @@ export default function ComplexedGrid() {
                 cy="50%"
                 outerRadius={80}
                 fill="pink"
-                label
+                label='name'
               />
+              <Tooltip />
             </PieChart>
           </Stack>
         </Box>
