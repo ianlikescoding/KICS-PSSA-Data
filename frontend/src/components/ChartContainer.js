@@ -116,7 +116,12 @@ export default function ComplexedGrid() {
         }}
       >
         <Stack spacing={4}>
-          <Stack direction="row" spacing={2} alignItems="center" justifyContent={"center"}>
+          <Stack
+            direction="row"
+            spacing={2}
+            alignItems="center"
+            justifyContent={"center"}
+          >
             <CustomizedMenus
               options={[
                 "Total Expenditures",
@@ -195,6 +200,39 @@ export default function ComplexedGrid() {
             />
             <Box>
               <h1>Demographic Data vs PSSA Score</h1>
+              <LineChart
+                width={730}
+                height={250}
+                data={data}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="pssa_score" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="Y2"
+                  stroke="#FFBB28"
+                  activeDot={{ r: 8 }}
+                />
+                <Line type="monotone" dataKey="Y1" stroke="#00C49F" />
+              </LineChart>
+            </Box>
+          </Stack>
+          <Stack direction="row" spacing={2} alignItems="center">
+            <CustomizedMenus
+              options={[
+                "School A",
+                "School B",
+                "School C",
+                "School D",
+                "School E",
+              ]}
+            />
+            <Box>
+              <h1>Time series test</h1>
               <LineChart
                 width={730}
                 height={250}
