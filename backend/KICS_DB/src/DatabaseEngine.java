@@ -123,9 +123,44 @@ public class DatabaseEngine {
     public void insert_exam(Exam exam){
         try {
             String sql = "insert into Exam " +
-                    "values (" + exam.AUN + ", "  + exam.schoolNumber + ", " + "'" + exam.county + "', '" + exam.districtName
-                    + "', '" + exam.schoolName + "', '" + exam.subject + "', " + exam.numberScored + ", " + exam.pAdvanced
-                    + ", " + exam.pProficient + ", " + exam.pBasic + ", " + exam.pBelowBasic
+                    "values (" + exam.schoolNumber + ", '" + exam.subject + "', " + exam.numberScored + ", " + exam.pAdvanced
+                    + ", " + exam.pProficient + ", " + exam.pBasic + ", " + exam.pBelowBasic + ", " + exam.year
+                    + ");";
+            int update = st.executeUpdate(sql);
+
+            if(update >= 1){
+                System.out.println("Inserted data");
+            }
+            else{
+                System.out.println("Failed to insert data");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert_district(int AUN, String districtName){
+        try {
+            String sql = "insert into District " +
+                    "values (" + AUN + ", '" + districtName + "'"
+                    + ");";
+            int update = st.executeUpdate(sql);
+
+            if(update >= 1){
+                System.out.println("Inserted data");
+            }
+            else{
+                System.out.println("Failed to insert data");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert_school(int schoolNumber, int AUN, String schoolName){
+        try {
+            String sql = "insert into School " +
+                    "values (" + schoolNumber + ", " + AUN + ", '" + schoolName + "'"
                     + ");";
             int update = st.executeUpdate(sql);
 
@@ -149,20 +184,16 @@ public class DatabaseEngine {
             ResultSet rs = st.executeQuery(sql);
 
             while(rs.next()){
-                int AUN = rs.getInt("AUN");
                 int schoolID = rs.getInt("School_ID");
-                String county = rs.getString("County");
-                String districtName = rs.getString("District_Name");
-                String schoolName = rs.getString("School_Name");
                 String subject = rs.getString("Subject");
                 int numberScored = rs.getInt("Number_Scored");
                 float pAdvanced = rs.getFloat("P_Advanced");
                 float pProficient = rs.getFloat("P_Proficient");
                 float pBasic = rs.getFloat("P_Basic");
                 float pBelowBasic = rs.getFloat("P_Below_Basic");
+                int year =  rs.getInt("year");
 
-                Exam exam = new Exam(AUN, schoolID, county, districtName, schoolName, subject,
-                        numberScored, pAdvanced, pProficient, pBasic, pBelowBasic);
+                Exam exam = new Exam(schoolID, subject, numberScored, pAdvanced, pProficient, pBasic, pBelowBasic, year);
 
 
                 exams.add(exam);
