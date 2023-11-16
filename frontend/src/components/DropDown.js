@@ -48,7 +48,8 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function CustomizedMenus() {
+export default function CustomizedMenus(props) {
+  const options = props.options ? props.options : ["No data"];
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -57,6 +58,11 @@ export default function CustomizedMenus() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const [currOption, setCurrOption] = React.useState(options[0]);
+  function changeDataSet(optionName) {
+    setCurrOption(optionName)
+    handleClose()
+  }
 
   return (
     <div>
@@ -69,8 +75,9 @@ export default function CustomizedMenus() {
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
+        sx={{width:200}}
       >
-        <b>Choose Data</b>
+        <b>{currOption}</b>
       </Button>
       <StyledMenu
         id="demo-customized-menu"
@@ -81,18 +88,11 @@ export default function CustomizedMenus() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
-          School
+        {options?.map(el => {
+         return <MenuItem onClick={() => changeDataSet(el)} disableRipple key={el}>
+          {el}
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          District
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          Dropout rate
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          Graduation rate
-        </MenuItem>
+        })}
       </StyledMenu>
     </div>
   );
