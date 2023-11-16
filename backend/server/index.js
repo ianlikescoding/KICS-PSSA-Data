@@ -1,7 +1,8 @@
 const express = require('express');
-//const db = require('./config/config.js')
+const db = require('./config/dbConfig.js')
+require('dotenv').config();
 const cors = require('cors')
-const connection = require('./config/dbconfig.js')
+//const connection = require('./config/dbConfig.js')
 const app = express();
 const  PORT = 3002;
 app.use(cors());
@@ -9,7 +10,7 @@ app.use(express.json())
 
 //connectDB();
 
-console.log(connection)
+//console.log(connection)
 
 // Route to get all posts
 app.get("/api/get", (req,res)=>{
@@ -80,7 +81,7 @@ console.log(err)
 app.listen(PORT, ()=>{
     //console.log(db);
     //module.exports = db;
-    db.connect( (err) => {
+    db.SSHConnection( (err) => {
         if(err) {
             console.log("Unsuccessful")
             return err.stack;
