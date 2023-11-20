@@ -8,8 +8,8 @@ const dbServer = {
     port: 3306, // default port for mysql is 3306
     database: process.env.DB_DATABASE, // database from which we want to connect out node application
     user: process.env.DB_USERNAME, // username of the mysql connection
-    password: process.env.DB_PASSWORD // password of the mysql connection
-    //timeout: 33306
+    password: process.env.DB_PASSWORD, // password of the mysql connection
+    timeout: 10
 }
 
 const tunnelConfig = {
@@ -22,7 +22,7 @@ const tunnelConfig = {
 const forwardConfig = {
     srcHost: '127.0.0.1',
     srcPort: 22,
-    dstHost: '127.0.0.1',
+    dstHost: '139.147.9.167',
     dstPort: dbServer.port
 }
 
