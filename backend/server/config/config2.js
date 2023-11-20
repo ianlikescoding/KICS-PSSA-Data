@@ -1,11 +1,11 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const md5 = require('md5');
 const { Client } = require('ssh2');
 
 localhost = '127.0.0.1';
 
 mysqlConfig = {
-    host: '139.147.9.167', // host for connection
+    host: '127.0.0.1', // host for connection
     port: 3306, // default port for mysql is 3306
     database: 'kics', // database from which we want to connect out node application
     user: 'kics', // username of the mysql connection

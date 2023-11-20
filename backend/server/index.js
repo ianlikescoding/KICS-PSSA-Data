@@ -1,4 +1,5 @@
 const express = require('express');
+const sql = require('sqlite3');
 const db = require('./config/dbConfig.js')
 require('dotenv').config();
 const cors = require('cors')

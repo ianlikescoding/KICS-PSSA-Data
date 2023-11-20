@@ -21,7 +21,7 @@ const tunnelConfig = {
 
 const forwardConfig = {
     srcHost: '127.0.0.1',
-    srcPort: 3306,
+    srcPort: 22,
     dstHost: '127.0.0.1',
     dstPort: dbServer.port
 }
