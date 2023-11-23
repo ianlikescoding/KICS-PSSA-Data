@@ -56,6 +56,34 @@ export default function CustomizedMenus(props) {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
+    /*
+    fetch('http://localhost:3306/getspecific?' + new URLSearchParams({
+  cols: 'SchoolName',
+  table: 'School'
+}))
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+  */
+ fetch('http://localhost:3306/getspecific?cols=SchoolName&table=School')
+ .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
+    
+    /*{
+      params: JSON.stringify({
+          cols: "SchoolName",
+          table: "School",
+          //userId: 1
+  }),
+  
+      headers: {
+          'Content-type': 'application/json'
+      }
+      
+  }
+  */
     setAnchorEl(null);
   };
   const [currOption, setCurrOption] = React.useState(options[0]);
