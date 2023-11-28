@@ -62,5 +62,5 @@ app.get('/getspecific', function(req, res){
 
 
 app.listen(3001, () => {
-  console.log('Example app listening on port 3001!');
+  console.log('App listening on port 3001!');
  });

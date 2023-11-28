@@ -4,8 +4,7 @@ function FetchData() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Fetch data from the backend when the component mounts
-    fetchData();
+    fetchData()    
   }, []);
 
   useEffect(() => {
@@ -17,7 +16,7 @@ function FetchData() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:3001/allschool');
+      const response = await fetch('http://localhost:3001/test');
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
