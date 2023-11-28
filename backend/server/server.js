@@ -1,17 +1,21 @@
 var express = require('express');
-var app = express();
 const cors = require('cors');
 const sql = require('sqlite3');
 
+var app = express();
+
+
 let db = new sql.Database('./kics.db', (err)  => {
     if (err) {
-        console.error(err.message);
+        console.error("Error:", err.message);
     }
     console.log("Database connect!")
     
 })
 
 app.use(cors());
+app.use(express.json());
+
 app.get('/test', function (req, res) {
     
     console.log("got request");
@@ -57,6 +61,6 @@ app.get('/getspecific', function(req, res){
 });
 
 
-app.listen(3306, function () {
-  console.log('Example app listening on port 3306!');
+app.listen(3001, () => {
+  console.log('Example app listening on port 3001!');
  });

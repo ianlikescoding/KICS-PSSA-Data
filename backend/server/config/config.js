@@ -24,7 +24,7 @@ host: '139.147.9.167', //localhost?
 user: 'kics',
 password: 'KICS320',
 database: 'kics',
-port: 3306
+port: 3001
 };
 
 const tunnelConfig = {

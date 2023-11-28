@@ -65,10 +65,10 @@ export default function CustomizedMenus(props) {
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));
   */
- fetch('http://localhost:3306/getspecific?cols=SchoolName&table=School')
- .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error:', error));
+//  fetch('http://localhost:3306/getspecific?cols=SchoolName&table=School')
+//  .then(response => response.json())
+//   .then(data => console.log(data))
+//   .catch(error => console.error('Error:', error));
 
     
     /*{
