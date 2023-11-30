@@ -21,6 +21,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import AvgChart from "./AvgPSSAScoreChart";
+import FinancialsvPSSAChart from "./FinancialsvPSSAChart";
+import PersonnelvPSSAChart from "./PersonnelvPSSAChart";
 
 export default function ComplexedGrid() {
   // useEffect(() => {
@@ -32,7 +34,6 @@ export default function ComplexedGrid() {
   //   console.error("Data is null or undefined.");
   //   return null; // or return some default content
   // }
-  
 
   //TODO: being passed correctly, have to organize it so that
   //TODO: for some reason this code runs multiple times so I cant get the correct number for the result.
@@ -141,78 +142,8 @@ export default function ComplexedGrid() {
         }}
       >
         <Stack spacing={4}>
-          <Stack
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            justifyContent={"center"}
-          >
-            <CustomizedMenus
-              options={[
-                "Total Expenditures",
-                "Personal Income/Market Value per WADM",
-              ]}
-            />
-            <Box>
-              <h1>Financial Data vs PSSA Score</h1>
-              <ResponsiveContainer width={730} height={300}>
-                <ScatterChart
-                  margin={{
-                    top: 20,
-                    right: 20,
-                    bottom: 20,
-                    left: 20,
-                  }}
-                >
-                  <CartesianGrid />
-                  <XAxis type="number" dataKey="x" name="PSSA_score" />
-                  <YAxis
-                    type="number"
-                    dataKey="y"
-                    name="graduation_rate"
-                    unit="M"
-                  />
-                  <Tooltip
-                    cursor={{ strokeDasharray: "3 3" }}
-                    content={<CustomTooltip />}
-                  />
-                  <Scatter name="gradrate" data={data02} fill="#8884d8" />
-                </ScatterChart>
-              </ResponsiveContainer>
-            </Box>
-          </Stack>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <CustomizedMenus
-              options={[
-                "Graduation Rate",
-                "Dropout Rate",
-                "Postsecondary Bound",
-                "College Bound",
-              ]}
-            />
-            <Box>
-              <h1>Post-Graduate Data vs PSAA Score</h1>
-              <LineChart
-                width={730}
-                height={250}
-                data={data}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="pssa_score" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="Y2"
-                  stroke="#0088FE"
-                  activeDot={{ r: 8 }}
-                />
-                <Line type="monotone" dataKey="Y1" stroke="#82ca9d" />
-              </LineChart>
-            </Box>
-          </Stack>
+          <FinancialsvPSSAChart />
+          <PersonnelvPSSAChart />
           <Stack direction="row" spacing={2} alignItems="center">
             <CustomizedMenus
               options={[
@@ -246,7 +177,7 @@ export default function ComplexedGrid() {
               </LineChart>
             </Box>
           </Stack>
-          //TODO: calling  a chart. 
+          //TODO: calling a chart.
           <AvgChart />
         </Stack>
       </Paper>

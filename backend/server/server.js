@@ -4,7 +4,7 @@ const sql = require("sqlite3");
 
 var app = express();
 
-let db = new sql.Database("./kics.db", (err) => {
+let db = new sql.Database("./../kics.db", (err) => {
   if (err) {
     console.error("Error:", err.message);
   }
@@ -80,4 +80,29 @@ app.get("/pssabyschool", function (req, res) {
 
 app.listen(3001, () => {
   console.log("Example app listening on port 3001!");
+});
+
+app.get("/findatabydistrict", function (req, res) {
+  db.all(
+    "SELECT DISTINCT Finances.Year,Finances.AUN,TotalExpenditure,PAdvanced,PProficient,PBasic,PBelowBasic FROM (SELECT AUN AS PAUN,Year as PYear,AVG(PAdvanced) AS PAdvanced,AVG(PProficient) AS PProficient,AVG(PBasic) AS PBasic,AVG(PBelowBasic) AS PBelowBasic from School,PSSAScores where School.SchoolNumber=PSSAScores.SchoolNumber Group By AUN,Year),Finances WHERE PYear=2015 AND PAUN=Finances.AUN AND PYear=Finances.Year",
+    function (err, rows) {
+      if (err) {
+        console.error(err.message);
+      }
+      res.send(rows);
+    }
+  );
+});
+
+app.get("/personneldatabydistrict", function (req, res) {
+  //SELECT PersonnelData.Year,PersonnelData.AUN,EdLevel,PAdvanced,PProficient,PBasic,PBelowBasic FROM (SELECT AUN AS PAUN,Year as PYear,AVG(PAdvanced) AS PAdvanced,AVG(PProficient) AS PProficient,AVG(PBasic) AS PBasic,AVG(PBelowBasic) AS PBelowBasic from School,PSSAScores where School.SchoolNumber=PSSAScores.SchoolNumber Group By AUN,Year),PersonnelData WHERE PYear=2015 AND PAUN=PersonnelData.AUN AND PYear=PersonnelData.Year LIMIT 10
+  db.all(
+    "SELECT PersonnelData.Year,PersonnelData.AUN,EdLevel,PAdvanced,PProficient,PBasic,PBelowBasic FROM (SELECT AUN AS PAUN,Year as PYear,AVG(PAdvanced) AS PAdvanced,AVG(PProficient) AS PProficient,AVG(PBasic) AS PBasic,AVG(PBelowBasic) AS PBelowBasic from School,PSSAScores where School.SchoolNumber=PSSAScores.SchoolNumber Group By AUN,Year),PersonnelData WHERE PYear=2015 AND PAUN=PersonnelData.AUN AND PYear=PersonnelData.Year LIMIT 10",
+    function (err, rows) {
+      if (err) {
+        console.error(err.message);
+      }
+      res.send(rows);
+    }
+  );
 });
