@@ -11,7 +11,8 @@ function FetchData() {
   useEffect(() => {
     // Fetch data from the backend when the component mounts
     if (data) {
-      console.log("data fetched: ", data);
+      // console.log("data fetched: ", data);
+      // console.log("This is a test: ", data[1]);
     }
   }, [data]);
 
