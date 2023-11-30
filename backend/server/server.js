@@ -97,7 +97,7 @@ app.get("/findatabydistrict", function (req, res) {
 app.get("/personneldatabydistrict", function (req, res) {
   //SELECT PersonnelData.Year,PersonnelData.AUN,EdLevel,PAdvanced,PProficient,PBasic,PBelowBasic FROM (SELECT AUN AS PAUN,Year as PYear,AVG(PAdvanced) AS PAdvanced,AVG(PProficient) AS PProficient,AVG(PBasic) AS PBasic,AVG(PBelowBasic) AS PBelowBasic from School,PSSAScores where School.SchoolNumber=PSSAScores.SchoolNumber Group By AUN,Year),PersonnelData WHERE PYear=2015 AND PAUN=PersonnelData.AUN AND PYear=PersonnelData.Year LIMIT 10
   db.all(
-    "SELECT PersonnelData.Year,PersonnelData.AUN,EdLevel,PAdvanced,PProficient,PBasic,PBelowBasic FROM (SELECT AUN AS PAUN,Year as PYear,AVG(PAdvanced) AS PAdvanced,AVG(PProficient) AS PProficient,AVG(PBasic) AS PBasic,AVG(PBelowBasic) AS PBelowBasic from School,PSSAScores where School.SchoolNumber=PSSAScores.SchoolNumber Group By AUN,Year),PersonnelData WHERE PYear=2015 AND PAUN=PersonnelData.AUN AND PYear=PersonnelData.Year LIMIT 10",
+    "SELECT PersonnelData.Year,PersonnelData.AUN,EdLevel,Salary,PFemale,PMale,YearsOfService,PAdvanced,PProficient,PBasic,PBelowBasic FROM (SELECT AUN AS PAUN,Year as PYear,AVG(PAdvanced) AS PAdvanced,AVG(PProficient) AS PProficient,AVG(PBasic) AS PBasic,AVG(PBelowBasic) AS PBelowBasic from School,PSSAScores where School.SchoolNumber=PSSAScores.SchoolNumber Group By AUN,Year),PersonnelData WHERE PYear=2015 AND PAUN=PersonnelData.AUN AND PYear=PersonnelData.Year",
     function (err, rows) {
       if (err) {
         console.error(err.message);

@@ -27,12 +27,7 @@ const PersonnelvPSSAChart = () => {
   ];
   const [currOption, setCurrOption] = useState(options[0]);
 
-  useEffect(() => {
-    // Fetch data from the backend when the component mounts
-    fetchFinancialData();
-  }, []);
-
-  useEffect(() => {
+  function processPersonnelData() {
     var data = [];
     // Process data once fetched
     if (personnelDataUnprocessed) {
@@ -62,7 +57,16 @@ const PersonnelvPSSAChart = () => {
 
       setPersonnelData(data);
     }
-  }, [personnelDataUnprocessed]);
+  }
+
+  useEffect(() => {
+    // Fetch data from the backend when the component mounts
+    fetchFinancialData();
+  }, []);
+
+  useEffect(() => {
+    processPersonnelData();
+  }, [personnelDataUnprocessed, currOption]);
 
   async function fetchFinancialData() {
     try {
@@ -79,27 +83,6 @@ const PersonnelvPSSAChart = () => {
     }
   }
 
-  const data03 = [
-    { name: "School A", x: 3.8, y: 90 },
-    { name: "School B", x: 2.7, y: 78 },
-    { name: "School C", x: 2.5, y: 69 },
-    { name: "School D", x: 3.0, y: 82 },
-    { name: "School E", x: 3.2, y: 80 },
-    { name: "School F", x: 2.3, y: 67 },
-    { name: "School G", x: 3.6, y: 88 },
-    { name: "School H", x: 2.7, y: 78 },
-    { name: "School I", x: 2.0, y: 70 },
-    { name: "School J", x: 3.0, y: 81 },
-    { name: "School K", x: 3.2, y: 81 },
-    { name: "School L", x: 2.3, y: 72 },
-    { name: "School M", x: 3.8, y: 95 },
-    { name: "School N", x: 2.7, y: 78 },
-    { name: "School O", x: 2.5, y: 69 },
-    { name: "School P", x: 3.0, y: 82 },
-    { name: "School Q", x: 2.2, y: 75 },
-    { name: "School R", x: 0.94, y: 65 },
-  ];
-
   return (
     <Stack
       direction="row"
@@ -113,7 +96,7 @@ const PersonnelvPSSAChart = () => {
         currOption={currOption}
       />
       <Box>
-        <h1>Financial Data vs PSSA Score</h1>
+        <h1>Personnel Data vs PSSA Score</h1>
         <ResponsiveContainer width={730} height={400}>
           {personnelData ? (
             <ScatterChart
@@ -126,7 +109,7 @@ const PersonnelvPSSAChart = () => {
             >
               <CartesianGrid />
               <XAxis type="number" dataKey="x" name="PSSA_score" />
-              <YAxis type="number" dataKey="y" name="financial-data" />
+              <YAxis type="number" dataKey="y" name="personnel-data" />
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}
                 content={<CustomTooltip />}
@@ -150,7 +133,7 @@ export const CustomTooltip = ({ active, payload, label }) => {
       <div className="custom-tooltip" backgroundcolor="white">
         <h3>{`${payload[0].payload.AUN}`}</h3>
         <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
-        <p className="gradrate-label">{`Total Expenditure : $${payload[1].value}M`}</p>
+        <p className="gradrate-label">{`Data : $${payload[1].value}M`}</p>
       </div>
     );
   }
