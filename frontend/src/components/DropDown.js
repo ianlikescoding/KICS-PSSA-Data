@@ -50,6 +50,8 @@ const StyledMenu = styled((props) => (
 
 export default function CustomizedMenus(props) {
   const options = props.options ? props.options : ["No data"];
+  const currOption = props.currOption;
+  const setCurrOption = props.setCurrOption;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -58,10 +60,10 @@ export default function CustomizedMenus(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const [currOption, setCurrOption] = React.useState(options[0]);
+
   function changeDataSet(optionName) {
-    setCurrOption(optionName)
-    handleClose()
+    setCurrOption(optionName);
+    handleClose();
   }
 
   return (
@@ -75,7 +77,7 @@ export default function CustomizedMenus(props) {
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={{width:200}}
+        sx={{ width: 200 }}
       >
         <b>{currOption}</b>
       </Button>
@@ -88,10 +90,12 @@ export default function CustomizedMenus(props) {
         open={open}
         onClose={handleClose}
       >
-        {options?.map(el => {
-         return <MenuItem onClick={() => changeDataSet(el)} disableRipple key={el}>
-          {el}
-        </MenuItem>
+        {options?.map((el) => {
+          return (
+            <MenuItem onClick={() => changeDataSet(el)} disableRipple key={el}>
+              {el}
+            </MenuItem>
+          );
         })}
       </StyledMenu>
     </div>

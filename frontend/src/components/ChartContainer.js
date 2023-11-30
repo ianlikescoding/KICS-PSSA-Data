@@ -1,10 +1,11 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import CustomizedMenus from "./DropDown";
 import "../components/ChartContainer.css";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
+import PropTypes from "prop-types";
 import {
   XAxis,
   YAxis,
@@ -19,43 +20,67 @@ import {
   Line,
   ResponsiveContainer,
 } from "recharts";
+import AvgChart from "./AvgPSSAScoreChart";
 
 export default function ComplexedGrid() {
+  // useEffect(() => {
+  //   console.log("Data received in ComplexedGrid:", data00);
+  // }, [data00]);
+
+  // if (!data00) {
+  //   // Handle the case where data is null or undefined
+  //   console.error("Data is null or undefined.");
+  //   return null; // or return some default content
+  // }
+  
+
+  //TODO: being passed correctly, have to organize it so that
+  //TODO: for some reason this code runs multiple times so I cant get the correct number for the result.
+
+  // for (let i = 0; i < data00.length; i++) {
+  //   const currentObject = data00[i];
+
+  //   // Modify the values as needed;
+  //   currentObject["avg(PAdvanced)"] = currentObject["avg(PAdvanced)"] * 4;
+  //   currentObject["avg(PBasic)"] = currentObject["avg(PBasic)"] * 3;
+  //   currentObject["avg(PBelowBasic)"] = currentObject["avg(PBelowBasic)"] * 2;
+  //   currentObject["avg(PAdvanced)"] =
+  //     (currentObject["avg(PAdvanced)"] +
+  //       currentObject["avg(PBasic)"] +
+  //       currentObject["avg(PBelowBasic)"] +
+  //       currentObject["avg(PProficient)"]) /
+  //     4;
+  // }
+  // console.log("after change", data00);
+
   const data = [
     {
       pssa_score: 1.65,
       Y1: 4,
-      Y2: 3,
     },
     {
       pssa_score: 1.7,
       Y1: 8,
-      Y2: 8,
     },
     {
       pssa_score: 1.9,
       Y1: 7,
-      Y2: 9,
     },
     {
       pssa_score: 1.9,
       Y1: 13,
-      Y2: 14,
     },
     {
       pssa_score: 2.5,
       Y1: 20,
-      Y2: 18,
     },
     {
       pssa_score: 3.2,
       Y1: 16,
-      Y2: 18,
     },
     {
       pssa_score: 3.6,
       Y1: 10,
-      Y2: 13,
     },
   ];
 
@@ -221,39 +246,8 @@ export default function ComplexedGrid() {
               </LineChart>
             </Box>
           </Stack>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <CustomizedMenus
-              options={[
-                "School A",
-                "School B",
-                "School C",
-                "School D",
-                "School E",
-              ]}
-            />
-            <Box>
-              <h1>Time series test</h1>
-              <LineChart
-                width={730}
-                height={250}
-                data={data}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="pssa_score" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="Y2"
-                  stroke="#FFBB28"
-                  activeDot={{ r: 8 }}
-                />
-                <Line type="monotone" dataKey="Y1" stroke="#00C49F" />
-              </LineChart>
-            </Box>
-          </Stack>
+          //TODO: calling  a chart. 
+          <AvgChart />
         </Stack>
       </Paper>
       <Paper
@@ -295,3 +289,7 @@ export default function ComplexedGrid() {
     </Container>
   );
 }
+
+ComplexedGrid.propTypes = {
+  data: PropTypes.array, // Adjust the type according to the actual data structure
+};
