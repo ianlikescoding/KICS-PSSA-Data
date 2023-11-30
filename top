@@ -1,0 +1,295 @@
+[33mcommit b61455ca0c25c540b5bc93efe3dbd783d380f527[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Mon Nov 27 20:30:36 2023 -0500
+
+    little bit of cleanup on backend frontend
+
+[33mcommit 9e142a20b809e799ffb2b98be9def34d50d861c4[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Mon Nov 27 19:15:38 2023 -0500
+
+    backend frontend connection works
+
+[33mcommit 6aad0a7bed34ddefcf170bd3033c1c65b140c0d6[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Thu Nov 23 14:23:26 2023 -0500
+
+    tried connecting frontend and backend
+
+[33mcommit 3442962bb6a7c5fd11212c475250d1c856608cd7[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Thu Nov 23 13:12:57 2023 -0500
+
+    added graduation data
+
+[33mcommit 32f7bb7292b819fe4e47ef42c3d0bce2a3041f62[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Mon Nov 20 17:01:28 2023 -0500
+
+    added graduation data
+
+[33mcommit d69724b14449839b57a54fc163a4736053ecb325[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Mon Nov 20 14:55:13 2023 -0500
+
+    added backend database connection
+
+[33mcommit 608d952b42cba7b860b61893739d2e9b974b7913[m
+Merge: af7443d b42f05b
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Thu Nov 16 18:21:20 2023 -0500
+
+    Merge branch 'main' of https://github.com/ianlikescoding/KICS-PSSA-Data into main
+
+[33mcommit af7443dbae2aa64b70f01058bc14f858865fdc40[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Thu Nov 16 18:19:55 2023 -0500
+
+    final attempt to connect to mysql server
+
+[33mcommit b42f05bf97e1cab211523a67e471be61b92ebe36[m
+Author: kilbridc <kilbridc@lafayette.edu>
+Date:   Thu Nov 2 20:36:35 2023 -0400
+
+    added some data cleaning functions into java backend
+
+[33mcommit bd281afd202bb9de968267bd43530257c017202e[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Wed Oct 25 15:43:35 2023 -0400
+
+     added time series graph
+
+[33mcommit a9f33ebff78dfeb199d6a691d69d1c972392abf9[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Fri Oct 13 14:56:31 2023 -0400
+
+    center charts
+
+[33mcommit 982e0f483dafa6bdeeee069687665928f52f9f5f[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Fri Oct 13 14:33:54 2023 -0400
+
+    responsive dropdown
+
+[33mcommit 047aafedf9b9e09e4cc2ae3a17b4f8a85fa6707b[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Fri Oct 13 14:27:12 2023 -0400
+
+    fixed the headers
+
+[33mcommit b1569e2ba6568570c4d1aa09959c9d0a9f4c5991[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Fri Oct 13 14:00:14 2023 -0400
+
+    Customizing dropdown options
+
+[33mcommit 556c182f3aecbd1ede314e58708df99ff9dd9c36[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Wed Oct 11 14:56:23 2023 -0400
+
+    chart color changes
+
+[33mcommit f16b0b28d25c20fea2388b1a9fcf89e3b2a05182[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Wed Oct 11 14:13:39 2023 -0400
+
+    Chart touch-ups for demo
+
+[33mcommit b8335178af9fbda6d05178b77d6eb8ba92e963ce[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Fri Oct 6 15:57:12 2023 -0400
+
+    added ben's code
+
+[33mcommit 14b798ed0e4a0ec3238d3edcda725e8903bf82eb[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Wed Oct 4 15:11:56 2023 -0400
+
+    added print statements
+
+[33mcommit 5c08ce3a93d40fdb3d24132984b406637eaccdc9[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Wed Oct 4 15:00:30 2023 -0400
+
+    established ssh connection
+
+[33mcommit 032e9c703c771989506b8d2348f89eae9a5a0073[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Tue Oct 3 20:56:44 2023 -0400
+
+    further server work
+
+[33mcommit 22e221991acdef32a32cdd91a79a06c3aa834570[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Tue Oct 3 20:21:49 2023 -0400
+
+    added server connection
+
+[33mcommit 0b38739d8aaab92ddf9fd44e68482414ef3a8c1c[m
+Merge: a06d727 98184fa
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Tue Oct 3 20:20:50 2023 -0400
+
+    Merge branch 'main' of https://github.com/ianlikescoding/KICS-PSSA-Data into main
+
+[33mcommit a06d72787eedb515b09b30d8c3edafcea0a8988f[m
+Author: root <root@DESKTOP-G54CKI7.localdomain>
+Date:   Tue Oct 3 20:18:58 2023 -0400
+
+    started server connections
+
+[33mcommit 98184fa50887e5bd71dc08895af6f346503a1be9[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Tue Oct 3 20:08:46 2023 -0400
+
+    added pie chart
+
+[33mcommit b34b0beadbca384eee2477c41c27fe31d79ce1b3[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Tue Oct 3 19:46:10 2023 -0400
+
+    axios install
+
+[33mcommit 887c6059188801f141e8e63ff22a2f0f2badeea0[m[33m ([m[1;31morigin/recharts[m[33m)[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Mon Oct 2 20:47:29 2023 -0400
+
+    chart 1 formatting
+
+[33mcommit dbb1fd1ce2334f1b23e5ab8729666f6aee3090f8[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Sun Oct 1 21:44:52 2023 -0400
+
+    yay the chart will be displayed in a grid
+
+[33mcommit 7c9a1907c1ef8aa878e2a15e967772d528c089df[m
+Author: kilbridc <kilbridc@lafayette.edu>
+Date:   Sun Oct 1 19:57:26 2023 -0400
+
+    added function for select * for exams, and print_exam()
+
+[33mcommit 7e3beb2d4c52dff55080cf4f9c126f49be89fbe7[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Sun Oct 1 19:20:17 2023 -0400
+
+    ComplexedGrid cleanup
+
+[33mcommit 5090469c32d694fd4ce18f323f4a798921d13b9c[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Thu Sep 28 14:06:21 2023 -0400
+
+    minor changes added
+
+[33mcommit 76358fc2dd3c15c12ef92f7eefb22be2b92d6ab8[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Wed Sep 27 23:05:40 2023 -0400
+
+    added a more chart button
+
+[33mcommit dcf51be5f06d873a10d106c30a1ce0df501dc9a4[m
+Author: kilbridc <kilbridc@lafayette.edu>
+Date:   Wed Sep 27 21:30:49 2023 -0400
+
+    added exam data to database
+
+[33mcommit 350c746dcdc250652544eb750b1d24062a9c2907[m
+Author: kilbridc <kilbridc@lafayette.edu>
+Date:   Wed Sep 27 20:59:31 2023 -0400
+
+    made base data loop
+
+[33mcommit 8faa0debde5621afc2b5aa7a64875c05658d6854[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Wed Sep 27 14:34:08 2023 -0400
+
+    implemented grid for organizing the page
+
+[33mcommit b9b4cd3c125ce5bcf3ec6783921a7c6d0e337cc8[m
+Author: kilbridc <kilbridc@lafayette.edu>
+Date:   Tue Sep 26 21:47:38 2023 -0400
+
+    added backend directory with base java class for connecting to database
+
+[33mcommit 18762ebbc7510a853c90b2716a3466d1f25a15a8[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Mon Sep 25 16:56:18 2023 -0400
+
+    changed minor
+
+[33mcommit 16dea3b49d3f063fe308da419fcff42512771d07[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Mon Sep 25 16:43:08 2023 -0400
+
+    going to prep for dinner, still working on organization of page using grid
+
+[33mcommit 24fbce8d0d82408173d0af384232b2f74f42fa34[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Mon Sep 25 12:02:37 2023 -0400
+
+    adding grid, the chart size is fixed so will work later
+
+[33mcommit a183701e44a408b21d36039c65f03bc0b8b431ed[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Sun Sep 24 21:28:22 2023 -0400
+
+    generate chart bug fix
+
+[33mcommit ccf7a8eb814d66257605e90f0a17538ebfccf040[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Sun Sep 24 21:24:56 2023 -0400
+
+    added dropdown menus
+
+[33mcommit a653ddc853ffd0ac48cbe8f75ba731f263a53159[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Sun Sep 24 15:04:53 2023 -0400
+
+    having fun with buttons
+
+[33mcommit 33e7e466c37581571d530bd1ccaa0a915f1c71bc[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Thu Sep 21 19:39:11 2023 -0400
+
+    tried with pie chart
+
+[33mcommit 070f09d9a01835376990fa95389a75477bfa0a97[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Thu Sep 21 19:24:59 2023 -0400
+
+    minor fix
+
+[33mcommit 82d8ddf6ef84471815b0c89bffc287182193e4a7[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Thu Sep 21 17:19:04 2023 -0400
+
+    placed the logo top left
+
+[33mcommit b41cf6bcfb35d2c605bdb398dbf0de2d58824f9a[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Thu Sep 21 17:10:22 2023 -0400
+
+    replaced the logo
+
+[33mcommit 7b5230e4ced4db34b29a096b7d2c72ce6172c3c1[m
+Author: koyasuk <koyasuk@lafayette.edu>
+Date:   Thu Sep 21 16:57:41 2023 -0400
+
+    added logo but it does not go to left top:(
+
+[33mcommit 12400629a5eb03f5044f945b7f942639598018a8[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Thu Sep 21 14:08:50 2023 -0400
+
+    install billboardjs
+
+[33mcommit 9b19454d6e99a727c76a86e4392f4e0dfe581708[m
+Author: Sakhi <sakhinaik3@gmail.com>
+Date:   Mon Sep 18 20:56:15 2023 -0400
+
+    frontend framework
+
+[33mcommit 4704fc2f06e950c172af0c336faa145209c03abe[m
+Author: ianlikescoding <71194415+ianlikescoding@users.noreply.github.com>
+Date:   Sun Sep 17 19:57:16 2023 -0400
+
+    Initial commit
