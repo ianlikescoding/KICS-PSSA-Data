@@ -11,6 +11,7 @@ import {
   ScatterChart,
   Scatter,
   ResponsiveContainer,
+  Line,
 } from "recharts";
 import { CircularProgress } from "@mui/material";
 
@@ -21,15 +22,19 @@ const DemographicvPSSAChart = () => {
     "Enrollment by Hispanic",
     "Enrollment by NativeAmerican",
     "Enrollement by White",
+    "Enrollement by Male",
+    "Enrollement by Female",
   ];
 
   const [currOption, setCurrOption] = useState(options[0]);
   const [demographicDataUnprocessed, setDemographicDataUnprocessed] =
     useState(null);
   const [demographicData, setDemographicData] = useState(null);
+  const [yAxisLabel, setYAxisLabel] = useState("");
 
   function processeDemographicData() {
     var data = [];
+    var yAxisLabel = "";
     // Process data once fetched
     if (demographicDataUnprocessed) {
       demographicDataUnprocessed.forEach((el) => {
@@ -42,7 +47,12 @@ const DemographicvPSSAChart = () => {
           currOptionAsJsonTag = "NativeAmerican";
         } else if (currOption == options[4]) {
           currOptionAsJsonTag = "White";
+        } else if (currOption == options[5]) {
+          currOptionAsJsonTag = "Male";
+        } else if (currOption == options[6]) {
+          currOptionAsJsonTag = "Female";
         }
+
         var avgScore =
           (el.PAdvanced * 4 +
             el.PProficient * 3 +
@@ -54,9 +64,11 @@ const DemographicvPSSAChart = () => {
           x: avgScore,
           y: el[currOptionAsJsonTag],
         });
+        yAxisLabel = `% of ${currOptionAsJsonTag} students`;
       });
       setDemographicData(data);
     }
+    setYAxisLabel(yAxisLabel);
   }
   console.log("This is a test", demographicData);
   useEffect(() => {
@@ -79,7 +91,8 @@ const DemographicvPSSAChart = () => {
       console.error("Fetch error:", error);
     }
   }
-  console.log("This is a result", demographicData);
+  // console.log("This is a result", demographicData);
+
   return (
     <Stack direction="row" spacing={2} alignItems="center">
       <CustomizedMenus
@@ -101,7 +114,7 @@ const DemographicvPSSAChart = () => {
             >
               <CartesianGrid />
               <XAxis type="number" dataKey="x" name="PSSA_score" />
-              <YAxis type="number" dataKey="y" name="demographic-data" />
+              <YAxis type="number" dataKey="y" name={yAxisLabel} />
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}
                 // content={<CustomTooltip />}
@@ -116,19 +129,5 @@ const DemographicvPSSAChart = () => {
     </Stack>
   );
 };
-
-// export const CustomTooltip = ({ active, payload, label }) => {
-//   if (active && payload && payload.length) {
-//     return (
-//       <div className="custom-tooltip" backgroundColor="white">
-//         <h3>{`${payload[0].payload.AUN}`}</h3>
-//         <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
-//         <p className="gradrate-label">{`Total Expenditure : $${payload[1].value}M`}</p>
-//       </div>
-//     );
-//   }
-
-//   return null;
-// };
 
 export default DemographicvPSSAChart;
