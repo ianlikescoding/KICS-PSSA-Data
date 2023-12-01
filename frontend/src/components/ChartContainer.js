@@ -27,65 +27,6 @@ import DemographicvPSSAChart from "./DemographicvPSSAChart";
 import GraduationvPSSAChart from "./GraduationvPSSAChart";
 
 export default function ComplexedGrid() {
-  const data = [
-    {
-      pssa_score: 1.65,
-      Y1: 4,
-    },
-    {
-      pssa_score: 1.7,
-      Y1: 8,
-    },
-    {
-      pssa_score: 1.9,
-      Y1: 7,
-    },
-    {
-      pssa_score: 1.9,
-      Y1: 13,
-    },
-    {
-      pssa_score: 2.5,
-      Y1: 20,
-    },
-    {
-      pssa_score: 3.2,
-      Y1: 16,
-    },
-    {
-      pssa_score: 3.6,
-      Y1: 10,
-    },
-  ];
-
-  const data01 = [
-    { name: "Advanced", value: 40 },
-    { name: "Proficient", value: 30 },
-    { name: "Basic", value: 27 },
-    { name: "Below Basic", value: 3 },
-  ];
-
-  const data02 = [
-    { name: "School A", x: 3.8, y: 90 },
-    { name: "School B", x: 2.7, y: 78 },
-    { name: "School C", x: 2.5, y: 69 },
-    { name: "School D", x: 3.0, y: 82 },
-    { name: "School E", x: 3.2, y: 80 },
-    { name: "School F", x: 2.3, y: 67 },
-    { name: "School G", x: 3.6, y: 88 },
-    { name: "School H", x: 2.7, y: 78 },
-    { name: "School I", x: 2.0, y: 70 },
-    { name: "School J", x: 3.0, y: 81 },
-    { name: "School K", x: 3.2, y: 81 },
-    { name: "School L", x: 2.3, y: 72 },
-    { name: "School M", x: 3.8, y: 95 },
-    { name: "School N", x: 2.7, y: 78 },
-    { name: "School O", x: 2.5, y: 69 },
-    { name: "School P", x: 3.0, y: 82 },
-    { name: "School Q", x: 2.2, y: 75 },
-    { name: "School R", x: 0.94, y: 65 },
-  ];
-
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       console.log("payload: ", payload);
