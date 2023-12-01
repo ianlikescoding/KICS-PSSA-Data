@@ -11,11 +11,14 @@ public class Main {
             //CSVReader csv = new CSVReader("2019_PSSA.csv");
             //csv.readExamData();
 
+            CSVReader csv = new CSVReader("2019_School_Facts.csv");
+            csv.readDemographicData();
+
             //CSVReader csv = new CSVReader("SchoolFastFacts_2019.csv");
             //csv.readSchoolData();
 
-            CSVReader csv = new CSVReader("2018_PSSA.csv");
-            csv.readExamData();
+            //CSVReader csv = new CSVReader("2019_Personnel.csv");
+            //csv.readPersonnelData(2019);
 
             //db.insert_exam(5, "Jeff", "Johnson");
             //db.update_fname_test(1, "cadeNew");

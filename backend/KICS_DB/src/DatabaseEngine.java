@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.Year;
 import java.util.ArrayList;
 
 public class DatabaseEngine {
@@ -122,7 +123,7 @@ public class DatabaseEngine {
 
     public void insert_exam(Exam exam){
         try {
-            String sql = "insert into Exam " +
+            String sql = "insert into PSSAScores " +
                     "values (" + exam.schoolNumber + ", '" + exam.subject + "', " + exam.numberScored + ", " + exam.pAdvanced
                     + ", " + exam.pProficient + ", " + exam.pBasic + ", " + exam.pBelowBasic + ", " + exam.year
                     + ");";
@@ -162,6 +163,155 @@ public class DatabaseEngine {
             String sql = "insert into School " +
                     "values (" + schoolNumber + ", " + AUN + ", '" + schoolName + "'"
                     + ");";
+            int update = st.executeUpdate(sql);
+
+            if(update >= 1){
+                System.out.println("Inserted data");
+            }
+            else{
+                System.out.println("Failed to insert data");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert_grad_rate(int schoolNumber, float pGrad, int year){
+        try {
+            String sql = "insert into Graduation " +
+                    "values (" + schoolNumber + ", " + year + ", " + "NULL, "
+                    + "NULL, " + pGrad + ", " + "NULL"
+                    + ");";
+            int update = st.executeUpdate(sql);
+
+            if(update >= 1){
+                System.out.println("Inserted data");
+            }
+            else{
+                System.out.println("Failed to insert data");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert_college_rate(int schoolNumber, float pCollegeBound, float pPostSecondary, int year){
+        try {
+            String sql = "update Graduation " +
+                    "set PCollegeBound = " + pCollegeBound + ", PPostSecondary = " + pPostSecondary
+                    + " where SchoolNumber = " + schoolNumber + " AND Year = " + year
+                    + ";";
+            int update = st.executeUpdate(sql);
+
+            if(update >= 1){
+                System.out.println("Inserted data");
+            }
+            else{
+                System.out.println("Failed to insert data");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert_dropout_rate(int schoolNumber, float dropoutRate, int year){
+        try {
+            String sql = "update Graduation " +
+                    "set DropoutRate = " + dropoutRate
+                    + " where SchoolNumber = " + schoolNumber + " AND Year = " + year
+                    + ";";
+            int update = st.executeUpdate(sql);
+
+            if(update >= 1){
+                System.out.println("Inserted data");
+            }
+            else{
+                System.out.println("Failed to insert data");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert_total_expenditures(int AUN, double expenditures, int year){
+        try {
+            if (expenditures != 0){
+                String sql = "insert into Finances " +
+                        "values (" + year + ", " + AUN + ", " + expenditures
+                        + ", NULL, " + "NULL"
+                        + ");";
+                int update = st.executeUpdate(sql);
+
+                if(update >= 1){
+                    System.out.println("Inserted data");
+                }
+                else{
+                    System.out.println("Failed to insert data");
+                }
+            }
+            else {
+                String sql = "insert into Finances " +
+                        "values (" + year + ", " + AUN + ", NULL"
+                        + ", NULL, " + "NULL"
+                        + ");";
+                int update = st.executeUpdate(sql);
+
+                if(update >= 1){
+                    System.out.println("Inserted data");
+                }
+                else{
+                    System.out.println("Failed to insert data");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert_aid_ratios(int AUN, float personalIncome, float WADM, int year){
+        try {
+            String sql = "update Finances " +
+                    "set PersonalIncome = " + personalIncome + ", WADM = " + WADM
+                    + " where AUN = " + AUN + " AND Year = " + year
+                    + ";";
+            int update = st.executeUpdate(sql);
+
+            if(update >= 1){
+                System.out.println("Inserted data");
+            }
+            else{
+                System.out.println("Failed to insert data");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert_personnel(int AUN, float PFemale, float PMale, float EdLevel, float Salary, float YearsOfService, int year){
+        try {
+            String sql = "insert into PersonnelData " +
+                    "values (" + AUN + ", " + year + ", " + EdLevel + ", "
+                    + Salary + ", " + PFemale + ", " + PMale + ", " + YearsOfService
+                    + ");";
+            int update = st.executeUpdate(sql);
+
+            if(update >= 1){
+                System.out.println("Inserted data");
+            }
+            else{
+                System.out.println("Failed to insert data");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert_demographic_data(String demographic, int schoolNumber, float value){
+        try {
+            String sql = "update Demographics " +
+                    "set " + demographic + "= " + value
+                    + " where SchoolNumber = " + schoolNumber
+                    + ";";
             int update = st.executeUpdate(sql);
 
             if(update >= 1){
