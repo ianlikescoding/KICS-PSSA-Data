@@ -14,7 +14,7 @@ import {
 } from "recharts";
 import { CircularProgress } from "@mui/material";
 
-function FetchData() {
+function AvgPSSAScore() {
   let options = "GETTYSBURG AREA MS";
   const [data, setData] = useState(null);
   const [schoolName, setName] = useState([]);
@@ -34,14 +34,7 @@ function FetchData() {
 
   const fetchName = async () => {
     try {
-      const responseName = await fetch(
-        "http://localhost:3001/getDictionary?" +
-          new URLSearchParams({
-            cols: "distinct s.SchoolName, s.SchoolNumber",
-            table: "PSSAScores p, School s",
-            attribute: "p.SchoolNumber = s.SchoolNumber",
-          })
-      );
+      const responseName = await fetch("http://localhost:3001/dictionary");
       if (!responseName.ok) {
         throw new Error(`HTTP error! Status: ${responseName.status}`);
       }
@@ -64,15 +57,7 @@ function FetchData() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:3001/getspecific?" +
-          new URLSearchParams({
-            cols: "SchoolNumber, Year, avg(PAdvanced), avg(PProficient), avg(PBasic), avg(PBelowBasic)",
-            table: "PSSAScores",
-            attribute: "SchoolNumber != 0", //TODO: check the equality later this should be a parameterize
-            spec: "SchoolNumber, Year",
-          })
-      );
+      const response = await fetch("http://localhost:3001/avg");
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -110,14 +95,6 @@ function FetchData() {
   // Convert the Set to an array for options
   options = Array.from(uniqueSchoolNames);
 
-  // const handleDropdownChange = (selectedItem) => {
-  //   setSelectedSchool(selectedItem);
-  //   console.log("This is the selected school", selectedSchool);
-  // };
-  //TODO: I would like to get a school name, and convert that to School number using dictionary
-  //      Then use that as a parameter of sql query to get all the data needed.
-  // console.log(data);
-
   if (!data) {
     return null;
   }
@@ -125,6 +102,7 @@ function FetchData() {
   //Organized data is key:SchoolNumber, value: map of (year,weighted score);
   const organizedData = new Map();
 
+  console.log("This is data:", data);
   for (let i = 0; i < data.length; i++) {
     const schoolNumber = data[i].SchoolNumber;
     const year = data[i].Year;
@@ -147,8 +125,6 @@ function FetchData() {
     });
   }
 
-  // console.log("Organized Data:", organizedData);
-
   let selectedSchoolNumber = 10;
   for (const [schoolNumber, schoolName] of dictionary.entries()) {
     if (schoolName === currOption) {
@@ -158,20 +134,15 @@ function FetchData() {
   }
 
   const dataSet = organizedData.get(selectedSchoolNumber);
-  const dataSetArray = Array.from(dataSet.values());
-  console.log(dataSetArray);
+  const dataSetArray = dataSet ? Array.from(dataSet.values()) : [];
 
   return (
     <Stack direction="row" spacing={2} alignItems="center">
-      {options ? (
-        <CustomizedMenus
-          options={options}
-          setCurrOption={setCurrOption}
-          currOption={currOption || options[0]}
-        />
-      ) : (
-        <CircularProgress style={{ margin: "auto" }} />
-      )}
+      <CustomizedMenus
+        options={options}
+        setCurrOption={setCurrOption}
+        currOption={currOption || options[0]}
+      />
       <Box>
         <h1>Average PSSA Score</h1>
         <LineChart
@@ -197,4 +168,4 @@ function FetchData() {
   );
 }
 
-export default FetchData;
+export default AvgPSSAScore;

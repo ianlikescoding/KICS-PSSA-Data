@@ -23,37 +23,10 @@ import {
 import AvgChart from "./AvgPSSAScoreChart";
 import FinancialsvPSSAChart from "./FinancialsvPSSAChart";
 import PersonnelvPSSAChart from "./PersonnelvPSSAChart";
+import DemographicvPSSAChart from "./DemographicvPSSAChart";
+import GraduationvPSSAChart from "./GraduationvPSSAChart";
 
 export default function ComplexedGrid() {
-  // useEffect(() => {
-  //   console.log("Data received in ComplexedGrid:", data00);
-  // }, [data00]);
-
-  // if (!data00) {
-  //   // Handle the case where data is null or undefined
-  //   console.error("Data is null or undefined.");
-  //   return null; // or return some default content
-  // }
-
-  //TODO: being passed correctly, have to organize it so that
-  //TODO: for some reason this code runs multiple times so I cant get the correct number for the result.
-
-  // for (let i = 0; i < data00.length; i++) {
-  //   const currentObject = data00[i];
-
-  //   // Modify the values as needed;
-  //   currentObject["avg(PAdvanced)"] = currentObject["avg(PAdvanced)"] * 4;
-  //   currentObject["avg(PBasic)"] = currentObject["avg(PBasic)"] * 3;
-  //   currentObject["avg(PBelowBasic)"] = currentObject["avg(PBelowBasic)"] * 2;
-  //   currentObject["avg(PAdvanced)"] =
-  //     (currentObject["avg(PAdvanced)"] +
-  //       currentObject["avg(PBasic)"] +
-  //       currentObject["avg(PBelowBasic)"] +
-  //       currentObject["avg(PProficient)"]) /
-  //     4;
-  // }
-  // console.log("after change", data00);
-
   const data = [
     {
       pssa_score: 1.65,
@@ -143,42 +116,9 @@ export default function ComplexedGrid() {
       >
         <Stack spacing={4}>
           <FinancialsvPSSAChart />
+          <GraduationvPSSAChart />
           <PersonnelvPSSAChart />
-          <Stack direction="row" spacing={2} alignItems="center">
-            <CustomizedMenus
-              options={[
-                "Literacy",
-                "Enrollment by Gender",
-                "Enrollment by Race",
-                "Attendance",
-                "Faculty Years of Service",
-              ]}
-            />
-            <Box>
-              <h1>Demographic Data vs PSSA Score</h1>
-              <LineChart
-                width={730}
-                height={250}
-                data={data}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="pssa_score" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="Y2"
-                  stroke="#FFBB28"
-                  activeDot={{ r: 8 }}
-                />
-                <Line type="monotone" dataKey="Y1" stroke="#00C49F" />
-              </LineChart>
-            </Box>
-          </Stack>
-          //TODO: calling a chart.
-          <AvgChart />
+          <DemographicvPSSAChart />
         </Stack>
       </Paper>
       <Paper
@@ -196,24 +136,8 @@ export default function ComplexedGrid() {
         }}
       >
         <Box width="100%">
-          <h1>PSSA Score Breakdown</h1>
           <Stack direction="row" spacing={10} alignItems="center">
-            <CustomizedMenus
-              options={["School A", "School B", "School C", "School D"]}
-            />
-            <PieChart width={270} height={300}>
-              <Pie
-                dataKey="value"
-                isAnimationActive={false}
-                data={data01}
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                fill="pink"
-                label="name"
-              />
-              <Tooltip />
-            </PieChart>
+            <AvgChart />
           </Stack>
         </Box>
       </Paper>
