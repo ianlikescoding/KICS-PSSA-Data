@@ -27,10 +27,42 @@ import DemographicvPSSAChart from "./DemographicvPSSAChart";
 import GraduationvPSSAChart from "./GraduationvPSSAChart";
 
 export default function ComplexedGrid() {
+  const [finCorrelations, setFinCorrelations] = useState(null);
+  const [gradCorrelations, setGradCorrelations] = useState(null);
+  const [personnelCorrelations, setPersonnelCorrelations] = useState(null);
+  const [demCorrelations, setDemCorrelations] = useState(null);
+
+  useEffect(() => {
+    //rank all factor correlations
+    if (
+      finCorrelations &&
+      gradCorrelations &&
+      personnelCorrelations &&
+      demCorrelations
+    ) {
+      var allCorrelations = [
+        ...finCorrelations,
+        ...gradCorrelations,
+        ...personnelCorrelations,
+        ...demCorrelations,
+      ];
+      allCorrelations.sort((a, b) => {
+        return b.correlationCoefficient - a.correlationCoefficient;
+      });
+
+      console.log("allcorrs sorted: ", allCorrelations);
+    }
+  }, [
+    finCorrelations,
+    gradCorrelations,
+    personnelCorrelations,
+    demCorrelations,
+  ]);
+
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      console.log("payload: ", payload);
-      console.log("label: ", label);
+      // console.log("payload: ", payload);
+      // console.log("label: ", label);
       return (
         <div className="custom-tooltip" backgroundColor="white">
           <h3>{`${payload[0].payload.name}`}</h3>
@@ -56,10 +88,12 @@ export default function ComplexedGrid() {
         }}
       >
         <Stack spacing={4}>
-          <FinancialsvPSSAChart />
-          <PersonnelvPSSAChart />
-          <GraduationvPSSAChart />
-          <DemographicvPSSAChart />
+          <FinancialsvPSSAChart setFinCorrelations={setFinCorrelations} />
+          <PersonnelvPSSAChart
+            setPersonnelCorrelations={setPersonnelCorrelations}
+          />
+          <GraduationvPSSAChart setGradCorrelations={setGradCorrelations} />
+          <DemographicvPSSAChart setDemCorrelations={setDemCorrelations} />
         </Stack>
       </Paper>
       <Paper

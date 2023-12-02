@@ -15,9 +15,10 @@ import {
   Line,
 } from "recharts";
 import { CircularProgress } from "@mui/material";
-import { status } from "statistics.js";
+import { calculateRegression } from "./FinancialsvPSSAChart";
 
-const DemographicvPSSAChart = () => {
+const DemographicvPSSAChart = (props) => {
+  const setDemCorrelations = props.setDemCorrelations;
   const options = [
     "Enrollment by Asian",
     "Enrollment by AfricanAmerican",
@@ -37,6 +38,13 @@ const DemographicvPSSAChart = () => {
   function processeDemographicData() {
     var data = [];
     var yAxisLabel = "";
+    var asianData = [];
+    var africanAmericanData = [];
+    var hispanicData = [];
+    var nativeAmericanData = [];
+    var whiteData = [];
+    var maleData = [];
+    var femaleData = [];
     // Process data once fetched
     if (demographicDataUnprocessed) {
       demographicDataUnprocessed.forEach((el) => {
@@ -61,18 +69,87 @@ const DemographicvPSSAChart = () => {
             el.PBasic * 2 +
             el.PBelowBasic * 1) /
           4;
+
         data.push({
           School: el["SchoolName"],
           x: parseFloat(avgScore.toFixed(2)),
           y: el[currOptionAsJsonTag],
         });
+
+        asianData.push({
+          other: el["Asian"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        africanAmericanData.push({
+          other: el["AfricanAmerican"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        hispanicData.push({
+          other: el["Hispanic"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        nativeAmericanData.push({
+          other: el["NativeAmerican"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        whiteData.push({
+          other: el["White"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        maleData.push({
+          other: el["Male"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        femaleData.push({
+          other: el["Female"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
         yAxisLabel = `% of ${currOptionAsJsonTag} students`;
       });
+
+      var demRegressions = [];
+      demRegressions.push({
+        Name: "Asian",
+        correlationCoefficient: calculateRegression(asianData),
+      });
+      demRegressions.push({
+        Name: "AfricanAmerican",
+        correlationCoefficient: calculateRegression(africanAmericanData),
+      });
+      demRegressions.push({
+        Name: "Hispanic",
+        correlationCoefficient: calculateRegression(hispanicData),
+      });
+      demRegressions.push({
+        Name: "NativeAmerican",
+        correlationCoefficient: calculateRegression(nativeAmericanData),
+      });
+      demRegressions.push({
+        Name: "White",
+        correlationCoefficient: calculateRegression(whiteData),
+      });
+      demRegressions.push({
+        Name: "Male",
+        correlationCoefficient: calculateRegression(maleData),
+      });
+      demRegressions.push({
+        Name: "Female",
+        correlationCoefficient: calculateRegression(femaleData),
+      });
+      setDemCorrelations(demRegressions);
+
       setDemographicData(data);
     }
     setYAxisLabel(yAxisLabel);
   }
-  console.log("This is a test", demographicData);
+
   useEffect(() => {
     fetchDemographicData();
   }, []);

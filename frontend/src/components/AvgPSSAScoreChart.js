@@ -116,7 +116,6 @@ function AvgPSSAScore() {
   //Organized data is key:SchoolNumber, value: map of (year,weighted score);
   const organizedData = new Map();
 
-  console.log("This is data:", data);
   for (let i = 0; i < data.length; i++) {
     const schoolNumber = data[i].SchoolNumber;
     const year = data[i].Year;

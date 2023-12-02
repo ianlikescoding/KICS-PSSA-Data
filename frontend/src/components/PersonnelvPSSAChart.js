@@ -14,8 +14,11 @@ import {
   Scatter,
   ResponsiveContainer,
 } from "recharts";
+import { calculateRegression } from "./FinancialsvPSSAChart";
 
-const PersonnelvPSSAChart = () => {
+const PersonnelvPSSAChart = (props) => {
+  const setPersonnelCorrelations = props.setPersonnelCorrelations;
+
   const [personnelDataUnprocessed, setPersonnelDataUnprocessed] =
     useState(null);
   const [personnelData, setPersonnelData] = useState(null);
@@ -30,6 +33,11 @@ const PersonnelvPSSAChart = () => {
 
   function processPersonnelData() {
     var data = [];
+    var edLevelData = [];
+    var salaryData = [];
+    var pFemaleData = [];
+    var pMaleData = [];
+    var yearsOfServiceData = [];
     // Process data once fetched
     if (personnelDataUnprocessed) {
       personnelDataUnprocessed.forEach((el) => {
@@ -54,7 +62,55 @@ const PersonnelvPSSAChart = () => {
           x: parseFloat(avgScore.toFixed(2)),
           y: el[currOptionAsJsonTag],
         });
+
+        edLevelData.push({
+          other: el["EdLevel"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        salaryData.push({
+          other: el["Salary"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        pFemaleData.push({
+          other: el["PFemale"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        pMaleData.push({
+          other: el["PMale"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        yearsOfServiceData.push({
+          other: el["YearsOfService"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
       });
+
+      var personnelRegressions = [];
+      personnelRegressions.push({
+        Name: "EdLevel",
+        correlationCoefficient: calculateRegression(edLevelData),
+      });
+      personnelRegressions.push({
+        Name: "Salary",
+        correlationCoefficient: calculateRegression(salaryData),
+      });
+      personnelRegressions.push({
+        Name: "PFemale",
+        correlationCoefficient: calculateRegression(pFemaleData),
+      });
+      personnelRegressions.push({
+        Name: "PMale",
+        correlationCoefficient: calculateRegression(pMaleData),
+      });
+      personnelRegressions.push({
+        Name: "YearsOfService",
+        correlationCoefficient: calculateRegression(yearsOfServiceData),
+      });
+      setPersonnelCorrelations(personnelRegressions);
 
       setPersonnelData(data);
     }

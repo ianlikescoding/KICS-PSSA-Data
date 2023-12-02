@@ -57,7 +57,7 @@ app.get("/getspecific", function (req, res) {
       spec +
       ";";
   }
-  console.log(requestString);
+
   db.all(requestString, function (err, rows) {
     if (err) {
       console.error(err.message);

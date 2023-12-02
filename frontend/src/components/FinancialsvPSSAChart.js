@@ -17,8 +17,11 @@ import {
   Line,
   ResponsiveContainer,
 } from "recharts";
+import Statistics from "statistics.js";
 
-const FinancialsvPSSAChart = () => {
+const FinancialsvPSSAChart = (props) => {
+  const setFinCorrelations = props.setFinCorrelations;
+
   const [finDataUnprocessed, setFinDataUnprocessed] = useState(null);
   const [finData, setFinData] = useState(null);
   const options = [
@@ -34,11 +37,15 @@ const FinancialsvPSSAChart = () => {
 
   function processFinancialData() {
     var data = [];
+    var totalExpenditureData = [];
+    var wadmData = [];
+    var personalIncomeData = [];
     // Process data once fetched
     if (finDataUnprocessed) {
       finDataUnprocessed.forEach((el) => {
         var currOptionAsJsonTag = "TotalExpenditure";
         var formattedVal = 0;
+
         if (currOption == options[1]) {
           currOptionAsJsonTag = "WADM";
           formattedVal = el[currOptionAsJsonTag];
@@ -60,7 +67,37 @@ const FinancialsvPSSAChart = () => {
           x: parseFloat(avgScore.toFixed(2)),
           y: formattedVal,
         });
+
+        totalExpenditureData.push({
+          other: el["TotalExpenditure"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        wadmData.push({
+          other: el["WADM"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        personalIncomeData.push({
+          other: el["PersonalIncome"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
       });
+
+      var financialRegressions = [];
+      financialRegressions.push({
+        Name: "TotalExpenditure",
+        correlationCoefficient: calculateRegression(totalExpenditureData),
+      });
+      financialRegressions.push({
+        Name: "WADM",
+        correlationCoefficient: calculateRegression(wadmData),
+      });
+      financialRegressions.push({
+        Name: "PersonalIncome",
+        correlationCoefficient: calculateRegression(personalIncomeData),
+      });
+      setFinCorrelations(financialRegressions);
 
       setFinData(data);
     }
@@ -70,10 +107,6 @@ const FinancialsvPSSAChart = () => {
     // Fetch data from the backend when the component mounts
     fetchFinancialData();
   }, []);
-
-  useEffect(() => {
-    processFinancialData();
-  }, [finDataUnprocessed]);
 
   useEffect(() => {
     processFinancialData();
@@ -117,11 +150,18 @@ const FinancialsvPSSAChart = () => {
       alignItems="center"
       justifyContent={"center"}
     >
-      <CustomizedMenus
-        options={options}
-        setCurrOption={setCurrOption}
-        currOption={currOption}
-      />
+      <Stack
+        direction="column"
+        spacing={2}
+        alignItems="center"
+        justifyContent={"center"}
+      >
+        <CustomizedMenus
+          options={options}
+          setCurrOption={setCurrOption}
+          currOption={currOption}
+        />
+      </Stack>
       <Box>
         <h1>Financial Data vs PSSA Score</h1>
         <ResponsiveContainer width={730} height={400}>
@@ -151,5 +191,17 @@ const FinancialsvPSSAChart = () => {
     </Stack>
   );
 };
+
+export function calculateRegression(data) {
+  var testVars = {
+    other: "metric",
+    PSSA: "metric",
+  };
+
+  var stats = new Statistics(data, testVars);
+  var regression = stats.linearRegression("other", "PSSA");
+
+  return regression.correlationCoefficient;
+}
 
 export default FinancialsvPSSAChart;

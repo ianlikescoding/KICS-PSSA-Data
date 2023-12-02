@@ -14,8 +14,11 @@ import {
   Scatter,
   ResponsiveContainer,
 } from "recharts";
+import { calculateRegression } from "./FinancialsvPSSAChart";
 
-const GraduationvPSSAChart = () => {
+const GraduationvPSSAChart = (props) => {
+  const setGradCorrelations = props.setGradCorrelations;
+
   const [gradDataUnprocessed, setGradDataUnprocessed] = useState(null);
   const [gradData, setGradData] = useState(null);
   const options = [
@@ -50,6 +53,11 @@ const GraduationvPSSAChart = () => {
 
   function processGraduationData() {
     var data = [];
+    var graduationRateData = [];
+    var dropoutRateData = [];
+    var pPostSecondaryData = [];
+    var pCollegeBoundData = [];
+
     // Process data once fetched
     if (gradDataUnprocessed) {
       gradDataUnprocessed.forEach((el) => {
@@ -74,7 +82,48 @@ const GraduationvPSSAChart = () => {
           x: parseFloat(avgScore.toFixed(2)),
           y: el[currOptionAsJsonTag],
         });
+
+        graduationRateData.push({
+          other: el["GraduationRate"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        dropoutRateData.push({
+          other: el["DropoutRate"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        pPostSecondaryData.push({
+          other: el["PPostSecondary"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
+
+        pCollegeBoundData.push({
+          other: el["PCollegeBound"],
+          PSSA: parseFloat(avgScore.toFixed(2)),
+        });
       });
+
+      var gradRegressions = [];
+      gradRegressions.push({
+        Name: "GraduationRate",
+        correlationCoefficient: calculateRegression(graduationRateData),
+      });
+      gradRegressions.push({
+        Name: "DropoutRate",
+        correlationCoefficient: calculateRegression(dropoutRateData),
+      });
+      gradRegressions.push({
+        Name: "PPostSecondary",
+        correlationCoefficient: calculateRegression(pPostSecondaryData),
+      });
+      gradRegressions.push({
+        Name: "PCollegeBound",
+        correlationCoefficient: calculateRegression(pCollegeBoundData),
+      });
+
+      setGradCorrelations(gradRegressions);
+
       setGradData(data);
     }
   }
@@ -123,8 +172,6 @@ const GraduationvPSSAChart = () => {
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
-    // console.log("payload: ", payload);
-    // console.log("label: ", label);
     return (
       <Paper className="custom-tooltip" backgroundColor="white">
         <h3>{`${payload[0].payload.School}`}</h3>
