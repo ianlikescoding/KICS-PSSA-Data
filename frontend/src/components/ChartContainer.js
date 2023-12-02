@@ -47,7 +47,10 @@ export default function ComplexedGrid() {
         ...demCorrelations,
       ];
       allCorrelations.sort((a, b) => {
-        return b.correlationCoefficient - a.correlationCoefficient;
+        return (
+          Math.abs(b.correlationCoefficient) -
+          Math.abs(a.correlationCoefficient)
+        );
       });
 
       console.log("allcorrs sorted: ", allCorrelations);
