@@ -1,4 +1,3 @@
-
 # KICS Project -DBMS-
 
 Motivation-
@@ -36,7 +35,7 @@ Install dependencies
   npm install
 ```
 
-Start the server, keep it open in a terminal window
+Start the server, keep it running in your terminal
 
 ```bash
   node server.js
@@ -68,3 +67,5 @@ npm start
 ## Documentation Link
 
 https://docs.google.com/document/d/1264IgYwqGwb5iEwcMwemqv6CwHqLYwY47VcrZnKhdIg/edit
+README.md
+Displaying README.md.
