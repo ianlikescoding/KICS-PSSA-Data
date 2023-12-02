@@ -12,7 +12,6 @@ import {
   ScatterChart,
   Scatter,
   ResponsiveContainer,
-  Line,
 } from "recharts";
 import { CircularProgress } from "@mui/material";
 import { calculateRegression } from "./FinancialsvPSSAChart";
@@ -34,8 +33,10 @@ const DemographicvPSSAChart = (props) => {
     useState(null);
   const [demographicData, setDemographicData] = useState(null);
   const [yAxisLabel, setYAxisLabel] = useState("");
+  const [currCorrelationNum, setCurrCorrelationNum] = useState(null);
 
   function processeDemographicData() {
+    var currCorrelationNum;
     var data = [];
     var yAxisLabel = "";
     var asianData = [];
@@ -45,6 +46,7 @@ const DemographicvPSSAChart = (props) => {
     var whiteData = [];
     var maleData = [];
     var femaleData = [];
+    var test = [];
     // Process data once fetched
     if (demographicDataUnprocessed) {
       demographicDataUnprocessed.forEach((el) => {
@@ -74,6 +76,11 @@ const DemographicvPSSAChart = (props) => {
           School: el["SchoolName"],
           x: parseFloat(avgScore.toFixed(2)),
           y: el[currOptionAsJsonTag],
+        });
+
+        test.push({
+          other: parseFloat(avgScore.toFixed(2)),
+          PSSA: el[currOptionAsJsonTag],
         });
 
         asianData.push({
@@ -144,8 +151,8 @@ const DemographicvPSSAChart = (props) => {
         correlationCoefficient: calculateRegression(femaleData),
       });
       setDemCorrelations(demRegressions);
-
       setDemographicData(data);
+      setCurrCorrelationNum(parseFloat(calculateRegression(test).toFixed(4)));
     }
     setYAxisLabel(yAxisLabel);
   }
@@ -186,12 +193,27 @@ const DemographicvPSSAChart = (props) => {
   };
 
   return (
-    <Stack direction="row" spacing={2} alignItems="center">
-      <CustomizedMenus
-        options={options}
-        setCurrOption={setCurrOption}
-        currOption={currOption}
-      />
+    <Stack
+      direction="row"
+      spacing={2}
+      alignItems="center"
+      justifyContent={"center"}
+    >
+      <Stack
+        direction="column"
+        spacing={2}
+        alignItems="center"
+        justifyContent={"center"}
+      >
+        <CustomizedMenus
+          options={options}
+          setCurrOption={setCurrOption}
+          currOption={currOption}
+        />
+        <Box>
+          <h3>Correlation Coefficient: {currCorrelationNum}</h3>
+        </Box>
+      </Stack>
       <Box>
         <h1>Demographic Data vs PSSA Score</h1>
         <ResponsiveContainer width={730} height={400}>

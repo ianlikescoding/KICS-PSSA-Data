@@ -18,7 +18,7 @@ import { calculateRegression } from "./FinancialsvPSSAChart";
 
 const GraduationvPSSAChart = (props) => {
   const setGradCorrelations = props.setGradCorrelations;
-
+  const [currCorrelationNum, setCurrCorrelationNum] = useState(null);
   const [gradDataUnprocessed, setGradDataUnprocessed] = useState(null);
   const [gradData, setGradData] = useState(null);
   const options = [
@@ -53,10 +53,12 @@ const GraduationvPSSAChart = (props) => {
 
   function processGraduationData() {
     var data = [];
+    var test = [];
     var graduationRateData = [];
     var dropoutRateData = [];
     var pPostSecondaryData = [];
     var pCollegeBoundData = [];
+    var currCorrelationNum;
 
     // Process data once fetched
     if (gradDataUnprocessed) {
@@ -81,6 +83,10 @@ const GraduationvPSSAChart = (props) => {
           School: el["SchoolName"],
           x: parseFloat(avgScore.toFixed(2)),
           y: el[currOptionAsJsonTag],
+        });
+        test.push({
+          other: parseFloat(avgScore.toFixed(2)),
+          PSSA: el[currOptionAsJsonTag],
         });
 
         graduationRateData.push({
@@ -123,8 +129,8 @@ const GraduationvPSSAChart = (props) => {
       });
 
       setGradCorrelations(gradRegressions);
-
       setGradData(data);
+      setCurrCorrelationNum(parseFloat(calculateRegression(test).toFixed(4)));
     }
   }
 
@@ -135,11 +141,21 @@ const GraduationvPSSAChart = (props) => {
       alignItems="center"
       justifyContent={"center"}
     >
-      <CustomizedMenus
-        options={options}
-        setCurrOption={setCurrOption}
-        currOption={currOption}
-      />
+      <Stack
+        direction="column"
+        spacing={2}
+        alignItems="center"
+        justifyContent={"center"}
+      >
+        <CustomizedMenus
+          options={options}
+          setCurrOption={setCurrOption}
+          currOption={currOption}
+        />
+        <Box>
+          <h3>Correlation Coefficient: {currCorrelationNum}</h3>
+        </Box>
+      </Stack>
       <Box>
         <h1>{`${currOption} vs PSSA Score`}</h1>
         <ResponsiveContainer width={730} height={400}>

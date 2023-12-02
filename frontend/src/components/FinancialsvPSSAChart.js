@@ -4,7 +4,6 @@ import "../components/ChartContainer.css";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   XAxis,
@@ -13,15 +12,13 @@ import {
   Tooltip,
   ScatterChart,
   Scatter,
-  LineChart,
-  Line,
   ResponsiveContainer,
 } from "recharts";
 import Statistics from "statistics.js";
 
 const FinancialsvPSSAChart = (props) => {
   const setFinCorrelations = props.setFinCorrelations;
-
+  const [currCorrelationNum, setCurrCorrelationNum] = useState(null);
   const [finDataUnprocessed, setFinDataUnprocessed] = useState(null);
   const [finData, setFinData] = useState(null);
   const options = [
@@ -36,6 +33,8 @@ const FinancialsvPSSAChart = (props) => {
   }
 
   function processFinancialData() {
+    var currCorrelationNum;
+    var test = [];
     var data = [];
     var totalExpenditureData = [];
     var wadmData = [];
@@ -68,6 +67,11 @@ const FinancialsvPSSAChart = (props) => {
           y: formattedVal,
         });
 
+        test.push({
+          other: parseFloat(avgScore.toFixed(2)),
+          PSSA: el[currOptionAsJsonTag],
+        });
+
         totalExpenditureData.push({
           other: el["TotalExpenditure"],
           PSSA: parseFloat(avgScore.toFixed(2)),
@@ -98,8 +102,8 @@ const FinancialsvPSSAChart = (props) => {
         correlationCoefficient: calculateRegression(personalIncomeData),
       });
       setFinCorrelations(financialRegressions);
-
       setFinData(data);
+      setCurrCorrelationNum(parseFloat(calculateRegression(test).toFixed(4)));
     }
   }
 
@@ -161,6 +165,9 @@ const FinancialsvPSSAChart = (props) => {
           setCurrOption={setCurrOption}
           currOption={currOption}
         />
+        <Box>
+          <h3>Correlation Coefficient: {currCorrelationNum}</h3>
+        </Box>
       </Stack>
       <Box>
         <h1>Financial Data vs PSSA Score</h1>

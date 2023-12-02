@@ -18,7 +18,7 @@ import { calculateRegression } from "./FinancialsvPSSAChart";
 
 const PersonnelvPSSAChart = (props) => {
   const setPersonnelCorrelations = props.setPersonnelCorrelations;
-
+  const [currCorrelationNum, setCurrCorrelationNum] = useState(null);
   const [personnelDataUnprocessed, setPersonnelDataUnprocessed] =
     useState(null);
   const [personnelData, setPersonnelData] = useState(null);
@@ -32,6 +32,8 @@ const PersonnelvPSSAChart = (props) => {
   const [currOption, setCurrOption] = useState(options[0]);
 
   function processPersonnelData() {
+    var currCorrelationNum;
+    var test = [];
     var data = [];
     var edLevelData = [];
     var salaryData = [];
@@ -61,6 +63,11 @@ const PersonnelvPSSAChart = (props) => {
           District: el["DistrictName"],
           x: parseFloat(avgScore.toFixed(2)),
           y: el[currOptionAsJsonTag],
+        });
+
+        test.push({
+          other: parseFloat(avgScore.toFixed(2)),
+          PSSA: el[currOptionAsJsonTag],
         });
 
         edLevelData.push({
@@ -111,7 +118,7 @@ const PersonnelvPSSAChart = (props) => {
         correlationCoefficient: calculateRegression(yearsOfServiceData),
       });
       setPersonnelCorrelations(personnelRegressions);
-
+      setCurrCorrelationNum(parseFloat(calculateRegression(test).toFixed(4)));
       setPersonnelData(data);
     }
   }
@@ -170,11 +177,21 @@ const PersonnelvPSSAChart = (props) => {
       alignItems="center"
       justifyContent={"center"}
     >
-      <CustomizedMenus
-        options={options}
-        setCurrOption={setCurrOption}
-        currOption={currOption}
-      />
+      <Stack
+        direction="column"
+        spacing={2}
+        alignItems="center"
+        justifyContent={"center"}
+      >
+        <CustomizedMenus
+          options={options}
+          setCurrOption={setCurrOption}
+          currOption={currOption}
+        />
+        <Box>
+        <h3>Correlation Coefficient: {currCorrelationNum}</h3>
+        </Box>
+        </Stack>
       <Box>
         <h1>Personnel Data vs PSSA Score</h1>
         <ResponsiveContainer width={730} height={400}>

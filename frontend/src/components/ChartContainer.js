@@ -26,7 +26,8 @@ import PersonnelvPSSAChart from "./PersonnelvPSSAChart";
 import DemographicvPSSAChart from "./DemographicvPSSAChart";
 import GraduationvPSSAChart from "./GraduationvPSSAChart";
 
-export default function ComplexedGrid() {
+export default function ComplexedGrid(props) {
+  const setAllCorrelations = props.setAllCorrelations;
   const [finCorrelations, setFinCorrelations] = useState(null);
   const [gradCorrelations, setGradCorrelations] = useState(null);
   const [personnelCorrelations, setPersonnelCorrelations] = useState(null);
@@ -54,6 +55,7 @@ export default function ComplexedGrid() {
       });
 
       console.log("allcorrs sorted: ", allCorrelations);
+      setAllCorrelations(allCorrelations);
     }
   }, [
     finCorrelations,
