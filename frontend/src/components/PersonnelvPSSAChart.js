@@ -12,6 +12,7 @@ import {
   Tooltip,
   ScatterChart,
   Scatter,
+  Label,
   ResponsiveContainer,
 } from "recharts";
 import { calculateRegression } from "./FinancialsvPSSAChart";
@@ -189,9 +190,9 @@ const PersonnelvPSSAChart = (props) => {
           currOption={currOption}
         />
         <Box>
-        <h3>Correlation Coefficient: {currCorrelationNum}</h3>
+          <h3>Correlation Coefficient: {currCorrelationNum}</h3>
         </Box>
-        </Stack>
+      </Stack>
       <Box>
         <h1>Personnel Data vs PSSA Score</h1>
         <ResponsiveContainer width={730} height={400}>
@@ -205,8 +206,16 @@ const PersonnelvPSSAChart = (props) => {
               }}
             >
               <CartesianGrid />
-              <XAxis type="number" dataKey="x" name="PSSA_score" />
-              <YAxis type="number" dataKey="y" name="personnel-data" />
+              <XAxis type="number" dataKey="x" name="PSSA_score">
+                <Label value="PSSA Score" offset={-5} position="insideBottom" />
+              </XAxis>
+              <YAxis type="number" dataKey="y" name="personnel-data">
+                <Label
+                  value="(%)"
+                  offset={-5}
+                  position={"insideTopLeft"}
+                ></Label>
+              </YAxis>
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}
                 content={<CustomTooltip />}

@@ -13,6 +13,7 @@ import {
   ScatterChart,
   Scatter,
   ResponsiveContainer,
+  Label,
 } from "recharts";
 import Statistics from "statistics.js";
 
@@ -182,8 +183,20 @@ const FinancialsvPSSAChart = (props) => {
               }}
             >
               <CartesianGrid />
-              <XAxis type="number" dataKey="x" name="PSSA_score" />
-              <YAxis type="number" dataKey="y" name="financial-data" />
+              <XAxis type="number" dataKey="x" name="PSSA_score">
+                <Label
+                  value="PSSA Scores"
+                  offset={-5}
+                  position={"insideBottom"}
+                ></Label>
+              </XAxis>
+              <YAxis type="number" dataKey="y" name="financial-data">
+                <Label
+                  value="($)"
+                  offset={-20}
+                  position={"insideTopLeft"}
+                ></Label>
+              </YAxis>
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}
                 content={<CustomTooltip />}

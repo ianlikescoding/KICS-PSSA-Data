@@ -12,6 +12,7 @@ import {
   Tooltip,
   ScatterChart,
   Scatter,
+  Label,
   ResponsiveContainer,
 } from "recharts";
 import { calculateRegression } from "./FinancialsvPSSAChart";
@@ -169,8 +170,16 @@ const GraduationvPSSAChart = (props) => {
               }}
             >
               <CartesianGrid />
-              <XAxis type="number" dataKey="x" name="PSSA_score" />
-              <YAxis type="number" dataKey="y" name="graduation-data" />
+              <XAxis type="number" dataKey="x" name="PSSA_score">
+                <Label value="PSSA Score" offset={-5} position="insideBottom" />
+              </XAxis>
+              <YAxis type="number" dataKey="y" name="graduation-data">
+                <Label
+                  value="(%)"
+                  offset={-5}
+                  position={"insideTopLeft"}
+                ></Label>
+              </YAxis>
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}
                 content={<CustomTooltip />}
