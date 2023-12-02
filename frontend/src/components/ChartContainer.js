@@ -57,8 +57,8 @@ export default function ComplexedGrid() {
       >
         <Stack spacing={4}>
           <FinancialsvPSSAChart />
-          <GraduationvPSSAChart />
           <PersonnelvPSSAChart />
+          <GraduationvPSSAChart />
           <DemographicvPSSAChart />
         </Stack>
       </Paper>

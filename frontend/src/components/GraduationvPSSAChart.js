@@ -52,7 +52,6 @@ const GraduationvPSSAChart = () => {
     // Process data once fetched
     if (gradDataUnprocessed) {
       gradDataUnprocessed.forEach((el) => {
-        console.log("EACH EL: ", el);
         var currOptionAsJsonTag = "GraduationRate";
         if (currOption == options[1]) {
           currOptionAsJsonTag = "DropoutRate";
@@ -61,19 +60,20 @@ const GraduationvPSSAChart = () => {
         } else if (currOption == options[3]) {
           currOptionAsJsonTag = "PCollegeBound";
         }
+
         var avgScore =
           (el.PAdvanced * 4 +
             el.PProficient * 3 +
             el.PBasic * 2 +
             el.PBelowBasic * 1) /
           4;
+
         data.push({
           School: el["SchoolName"],
           x: avgScore,
           y: el[currOptionAsJsonTag],
         });
       });
-      console.log("Prcoessed data: ", data);
       setGradData(data);
     }
   }
@@ -120,15 +120,15 @@ const GraduationvPSSAChart = () => {
   );
 };
 
-export const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     // console.log("payload: ", payload);
     // console.log("label: ", label);
     return (
       <div className="custom-tooltip" backgroundColor="white">
-        <h3>{`${payload[0].payload.AUN}`}</h3>
+        <h3>{`${payload[0].payload.School}`}</h3>
         <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
-        <p className="gradrate-label">{`Data : $${payload[1].value}M`}</p>
+        <p className="gradrate-label">{`Data : ${payload[1].value}%`}</p>
       </div>
     );
   }

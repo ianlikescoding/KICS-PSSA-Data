@@ -22,10 +22,49 @@ const FinancialsvPSSAChart = () => {
   const [finDataUnprocessed, setFinDataUnprocessed] = useState(null);
   const [finData, setFinData] = useState(null);
   const options = [
-    "Total Expenditures",
+    "Total Expenditure",
     "Personal Income/Market Value per WADM",
+    "Personal Income",
   ];
   const [currOption, setCurrOption] = useState(options[0]);
+
+  function formatMillions(num) {
+    return num / 1000000;
+  }
+
+  function processFinancialData() {
+    var data = [];
+    // Process data once fetched
+    if (finDataUnprocessed) {
+      finDataUnprocessed.forEach((el) => {
+        var currOptionAsJsonTag = "TotalExpenditure";
+        var formattedVal = 0;
+        if (currOption == options[1]) {
+          currOptionAsJsonTag = "WADM";
+          formattedVal = el[currOptionAsJsonTag];
+        } else if (currOption == options[2]) {
+          currOptionAsJsonTag = "PersonalIncome";
+          formattedVal = formatMillions(el[currOptionAsJsonTag]);
+        } else if (currOption == options[0]) {
+          formattedVal = formatMillions(el[currOptionAsJsonTag]);
+        }
+        var avgScore =
+          (el.PAdvanced * 4 +
+            el.PProficient * 3 +
+            el.PBasic * 2 +
+            el.PBelowBasic * 1) /
+          4;
+
+        data.push({
+          District: el["DistrictName"],
+          x: avgScore,
+          y: formattedVal,
+        });
+      });
+
+      setFinData(data);
+    }
+  }
 
   useEffect(() => {
     // Fetch data from the backend when the component mounts
@@ -33,25 +72,12 @@ const FinancialsvPSSAChart = () => {
   }, []);
 
   useEffect(() => {
-    var data = [];
-    // Process data once fetched
-    if (finDataUnprocessed) {
-      finDataUnprocessed.forEach((el) => {
-        var avgScore =
-          (el.PAdvanced * 4 +
-            el.PProficient * 3 +
-            el.PBasic * 2 +
-            el.PBelowBasic * 1) /
-          4;
-        data.push({
-          AUN: el.AUN,
-          x: avgScore,
-          y: el.TotalExpenditure,
-        });
-      });
-      setFinData(data);
-    }
+    processFinancialData();
   }, [finDataUnprocessed]);
+
+  useEffect(() => {
+    processFinancialData();
+  }, [finDataUnprocessed, currOption]);
 
   async function fetchFinancialData() {
     try {
@@ -66,26 +92,23 @@ const FinancialsvPSSAChart = () => {
     }
   }
 
-  const data03 = [
-    { name: "School A", x: 3.8, y: 90 },
-    { name: "School B", x: 2.7, y: 78 },
-    { name: "School C", x: 2.5, y: 69 },
-    { name: "School D", x: 3.0, y: 82 },
-    { name: "School E", x: 3.2, y: 80 },
-    { name: "School F", x: 2.3, y: 67 },
-    { name: "School G", x: 3.6, y: 88 },
-    { name: "School H", x: 2.7, y: 78 },
-    { name: "School I", x: 2.0, y: 70 },
-    { name: "School J", x: 3.0, y: 81 },
-    { name: "School K", x: 3.2, y: 81 },
-    { name: "School L", x: 2.3, y: 72 },
-    { name: "School M", x: 3.8, y: 95 },
-    { name: "School N", x: 2.7, y: 78 },
-    { name: "School O", x: 2.5, y: 69 },
-    { name: "School P", x: 3.0, y: 82 },
-    { name: "School Q", x: 2.2, y: 75 },
-    { name: "School R", x: 0.94, y: 65 },
-  ];
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      var dataLabel = `${currOption}: $${payload[1].value.toFixed(2)}M`;
+      if (currOption == options[1]) {
+        dataLabel = `WADM: $${payload[1].value.toFixed(2)}`;
+      }
+      return (
+        <div className="custom-tooltip" backgroundColor="white">
+          <h3>{`${payload[0].payload.District}`}</h3>
+          <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
+          <p className="gradrate-label">{dataLabel}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   return (
     <Stack
@@ -127,22 +150,6 @@ const FinancialsvPSSAChart = () => {
       </Box>
     </Stack>
   );
-};
-
-export const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    // console.log("payload: ", payload);
-    // console.log("label: ", label);
-    return (
-      <div className="custom-tooltip" backgroundColor="white">
-        <h3>{`${payload[0].payload.AUN}`}</h3>
-        <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
-        <p className="gradrate-label">{`Total Expenditure : $${payload[1].value}M`}</p>
-      </div>
-    );
-  }
-
-  return null;
 };
 
 export default FinancialsvPSSAChart;

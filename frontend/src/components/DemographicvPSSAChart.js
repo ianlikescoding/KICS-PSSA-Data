@@ -61,7 +61,7 @@ const DemographicvPSSAChart = () => {
             el.PBelowBasic * 1) /
           4;
         data.push({
-          schoolNumber: el["SchoolNumber"],
+          School: el["SchoolName"],
           x: avgScore,
           y: el[currOptionAsJsonTag],
         });
@@ -92,7 +92,20 @@ const DemographicvPSSAChart = () => {
       console.error("Fetch error:", error);
     }
   }
-  // console.log("This is a result", demographicData);
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip" backgroundcolor="white">
+          <h3>{`${payload[0].payload.School}`}</h3>
+          <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
+          <p className="gradrate-label">{`${currOption}: ${payload[1].value}%`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   return (
     <Stack direction="row" spacing={2} alignItems="center">
@@ -118,7 +131,7 @@ const DemographicvPSSAChart = () => {
               <YAxis type="number" dataKey="y" name={yAxisLabel} />
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}
-                // content={<CustomTooltip />}
+                content={<CustomTooltip />}
               />
               <Scatter name="gradrate" data={demographicData} fill="#8884d8" />
             </ScatterChart>

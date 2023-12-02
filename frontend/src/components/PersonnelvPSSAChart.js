@@ -3,6 +3,7 @@ import CustomizedMenus from "./DropDown";
 import "../components/ChartContainer.css";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   XAxis,
@@ -49,7 +50,7 @@ const PersonnelvPSSAChart = () => {
             el.PBelowBasic * 1) /
           4;
         data.push({
-          AUN: el["AUN"],
+          District: el["DistrictName"],
           x: avgScore,
           y: el[currOptionAsJsonTag],
         });
@@ -61,14 +62,14 @@ const PersonnelvPSSAChart = () => {
 
   useEffect(() => {
     // Fetch data from the backend when the component mounts
-    fetchFinancialData();
+    fetchPersonnelData();
   }, []);
 
   useEffect(() => {
     processPersonnelData();
   }, [personnelDataUnprocessed, currOption]);
 
-  async function fetchFinancialData() {
+  async function fetchPersonnelData() {
     try {
       const response = await fetch(
         "http://localhost:3001/personneldatabydistrict"
@@ -82,6 +83,29 @@ const PersonnelvPSSAChart = () => {
       console.error("Fetch error:", error);
     }
   }
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      var dataLabel = `${currOption}: ${payload[1].value} years`;
+      if (currOption == options[1]) {
+        dataLabel = `${currOption}: $${payload[1].value}`;
+      } else if (currOption == options[2]) {
+        dataLabel = `${currOption}: ${payload[1].value}%`;
+      } else if (currOption == options[3]) {
+        dataLabel = `${currOption}: ${payload[1].value}%`;
+      }
+
+      return (
+        <Paper className="custom-tooltip" backgroundColor="white" margin={10}>
+          <h3>{`${payload[0].payload.District}`}</h3>
+          <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
+          <p className="gradrate-label">{dataLabel}</p>
+        </Paper>
+      );
+    }
+
+    return null;
+  };
 
   return (
     <Stack
@@ -124,56 +148,5 @@ const PersonnelvPSSAChart = () => {
     </Stack>
   );
 };
-
-export const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    // console.log("payload: ", payload);
-    // console.log("label: ", label);
-    return (
-      <div className="custom-tooltip" backgroundcolor="white">
-        <h3>{`${payload[0].payload.AUN}`}</h3>
-        <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
-        <p className="gradrate-label">{`Data : $${payload[1].value}M`}</p>
-      </div>
-    );
-  }
-
-  return null;
-};
-
-/*
-<Stack direction="row" spacing={2} alignItems="center">
-            <CustomizedMenus
-              options={[
-                "Graduation Rate",
-                "Dropout Rate",
-                "Postsecondary Bound",
-                "College Bound",
-              ]}
-            />
-            <Box>
-              <h1>Post-Graduate Data vs PSAA Score</h1>
-              <LineChart
-                width={730}
-                height={250}
-                data={data}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="pssa_score" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="Y2"
-                  stroke="#0088FE"
-                  activeDot={{ r: 8 }}
-                />
-                <Line type="monotone" dataKey="Y1" stroke="#82ca9d" />
-              </LineChart>
-            </Box>
-          </Stack>
-*/
 
 export default PersonnelvPSSAChart;
