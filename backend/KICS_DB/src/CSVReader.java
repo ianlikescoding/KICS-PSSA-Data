@@ -222,7 +222,16 @@ public class CSVReader {
 
             // if data is valid
             if (row.length == 6 && row[0] != "" && row[1] != "" && row[2] != "" && row[3] != "" && row[4] != "" && row[5] != ""){
-                db.insert_personnel(Integer.parseInt(row[0]), Float.parseFloat(row[1]), Float.parseFloat(row[2]), Float.parseFloat(row[5]),
+                // calculate percentages
+                float aveFemales = Float.parseFloat(row[1]);
+                float aveMales = Float.parseFloat(row[2]);
+                float proportionFemale = aveFemales/(aveFemales+aveMales);
+                float proportionMale = aveMales/(aveFemales+aveMales);
+
+                float pFemale = proportionFemale * 100;
+                float pMale = proportionMale * 100;
+
+                db.insert_personnel(Integer.parseInt(row[0]), pFemale, pMale, Float.parseFloat(row[5]),
                         Float.parseFloat(row[3]), Float.parseFloat(row[4]), year);
 
             }
