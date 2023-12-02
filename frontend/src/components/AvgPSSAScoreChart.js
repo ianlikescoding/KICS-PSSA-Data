@@ -68,6 +68,20 @@ function AvgPSSAScore() {
     }
   };
 
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip" backgroundcolor="white">
+          <h3>{`${payload[0].payload.School}`}</h3>
+          <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
+          <p className="gradrate-label">{`${currOption}: ${payload[1].value}%`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   // creating a dictionary for dropdown menu,
   // When a user picks a specified
   if (!dictionary) {
@@ -121,7 +135,7 @@ function AvgPSSAScore() {
     // Add the data for the specific year
     organizedData.get(schoolNumber).set(year, {
       year: year,
-      score: weightedScore,
+      score: parseFloat(weightedScore.toFixed(2)),
     });
   }
 

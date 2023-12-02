@@ -51,7 +51,7 @@ const PersonnelvPSSAChart = () => {
           4;
         data.push({
           District: el["DistrictName"],
-          x: avgScore,
+          x: parseFloat(avgScore.toFixed(2)),
           y: el[currOptionAsJsonTag],
         });
       });

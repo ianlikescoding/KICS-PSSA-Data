@@ -57,7 +57,7 @@ const FinancialsvPSSAChart = () => {
 
         data.push({
           District: el["DistrictName"],
-          x: avgScore,
+          x: parseFloat(avgScore.toFixed(2)),
           y: formattedVal,
         });
       });
@@ -99,11 +99,11 @@ const FinancialsvPSSAChart = () => {
         dataLabel = `WADM: $${payload[1].value.toFixed(2)}`;
       }
       return (
-        <div className="custom-tooltip" backgroundColor="white">
+        <Paper className="custom-tooltip" backgroundColor="white">
           <h3>{`${payload[0].payload.District}`}</h3>
           <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
           <p className="gradrate-label">{dataLabel}</p>
-        </div>
+        </Paper>
       );
     }
 

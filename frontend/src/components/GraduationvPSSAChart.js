@@ -3,6 +3,7 @@ import CustomizedMenus from "./DropDown";
 import "../components/ChartContainer.css";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import { Paper } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   XAxis,
@@ -70,7 +71,7 @@ const GraduationvPSSAChart = () => {
 
         data.push({
           School: el["SchoolName"],
-          x: avgScore,
+          x: parseFloat(avgScore.toFixed(2)),
           y: el[currOptionAsJsonTag],
         });
       });
@@ -125,11 +126,11 @@ const CustomTooltip = ({ active, payload, label }) => {
     // console.log("payload: ", payload);
     // console.log("label: ", label);
     return (
-      <div className="custom-tooltip" backgroundColor="white">
+      <Paper className="custom-tooltip" backgroundColor="white">
         <h3>{`${payload[0].payload.School}`}</h3>
         <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
         <p className="gradrate-label">{`Data : ${payload[1].value}%`}</p>
-      </div>
+      </Paper>
     );
   }
 

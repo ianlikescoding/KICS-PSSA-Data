@@ -3,6 +3,7 @@ import CustomizedMenus from "./DropDown";
 import "../components/ChartContainer.css";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import {
   XAxis,
   YAxis,
@@ -62,7 +63,7 @@ const DemographicvPSSAChart = () => {
           4;
         data.push({
           School: el["SchoolName"],
-          x: avgScore,
+          x: parseFloat(avgScore.toFixed(2)),
           y: el[currOptionAsJsonTag],
         });
         yAxisLabel = `% of ${currOptionAsJsonTag} students`;
@@ -96,11 +97,11 @@ const DemographicvPSSAChart = () => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="custom-tooltip" backgroundcolor="white">
+        <Paper className="custom-tooltip" backgroundcolor="white">
           <h3>{`${payload[0].payload.School}`}</h3>
           <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
           <p className="gradrate-label">{`${currOption}: ${payload[1].value}%`}</p>
-        </div>
+        </Paper>
       );
     }
 
