@@ -15,7 +15,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { CircularProgress } from "@mui/material";
-import { calculateRegression } from "./FinancialsvPSSAChart";
+import { calculateRegression, xTickFormatter } from "./FinancialsvPSSAChart";
+import { yTickFormatter } from "./GraduationvPSSAChart";
 
 const DemographicvPSSAChart = (props) => {
   const setDemCorrelations = props.setDemCorrelations;
@@ -37,7 +38,6 @@ const DemographicvPSSAChart = (props) => {
   const [currCorrelationNum, setCurrCorrelationNum] = useState(null);
 
   function processeDemographicData() {
-    var currCorrelationNum;
     var data = [];
     var yAxisLabel = "";
     var asianData = [];
@@ -124,31 +124,31 @@ const DemographicvPSSAChart = (props) => {
 
       var demRegressions = [];
       demRegressions.push({
-        Name: "Asian",
+        Name: "% Asian Students",
         correlationCoefficient: calculateRegression(asianData),
       });
       demRegressions.push({
-        Name: "AfricanAmerican",
+        Name: "% African American Students",
         correlationCoefficient: calculateRegression(africanAmericanData),
       });
       demRegressions.push({
-        Name: "Hispanic",
+        Name: "% Hispanic Students",
         correlationCoefficient: calculateRegression(hispanicData),
       });
       demRegressions.push({
-        Name: "NativeAmerican",
+        Name: "% Native American Students",
         correlationCoefficient: calculateRegression(nativeAmericanData),
       });
       demRegressions.push({
-        Name: "White",
+        Name: "% White Students",
         correlationCoefficient: calculateRegression(whiteData),
       });
       demRegressions.push({
-        Name: "Male",
+        Name: "% Male Students",
         correlationCoefficient: calculateRegression(maleData),
       });
       demRegressions.push({
-        Name: "Female",
+        Name: "% Female Students",
         correlationCoefficient: calculateRegression(femaleData),
       });
       setDemCorrelations(demRegressions);
@@ -228,13 +228,25 @@ const DemographicvPSSAChart = (props) => {
               }}
             >
               <CartesianGrid />
-              <XAxis type="number" dataKey="x" name="PSSA_score">
-                <Label value="PSSA Score" offset={-5} position="insideBottom" />
+              <XAxis
+                type="number"
+                dataKey="x"
+                name="PSSA_score"
+                tickFormatter={xTickFormatter}
+              >
+                <Label
+                  value="PSSA Scores"
+                  offset={-20}
+                  position="insideBottom"
+                />
               </XAxis>
 
-              <YAxis type="number" dataKey="y" name={yAxisLabel}>
-                <Label value="(%)" offset={-5} position={"insideBottomLeft"}></Label>
-              </YAxis>
+              <YAxis
+                type="number"
+                dataKey="y"
+                name={yAxisLabel}
+                tickFormatter={yTickFormatter}
+              ></YAxis>
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}
                 content={<CustomTooltip />}

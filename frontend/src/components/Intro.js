@@ -13,10 +13,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 const Intro = (props) => {
   const allCorrelations = props.allCorrelations;
 
-  //   useEffect(() => {
-  //     processGraduationData();
-  //   }, [allCorrelations]);
-
   return (
     <Paper
       sx={{
@@ -29,19 +25,13 @@ const Intro = (props) => {
           theme.palette.mode === "dark" ? "#1A2027" : "#fff",
       }}
     >
-      {/* <h2>
-        {`What factors correlate with a school's/district's PSSA Scores?`}
-      </h2> */}
       <Accordion defaultExpanded>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography variant="h5">
-            Research Question: What factors correlate with a school's/district's
-            PSSA Scores?
-          </Typography>
+          <Typography variant="h5">Research Background</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -65,11 +55,14 @@ const Intro = (props) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant="h5">Strongest Correlations</Typography>
+          <Typography variant="h5">
+            Strongest Correlations (Pearson’s correlation coefficient)
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            The factors that had the strongest correlation with PSSA scores:
+            The following factors had the strongest correlation with PSSA
+            scores:
             <br />
           </Typography>
 

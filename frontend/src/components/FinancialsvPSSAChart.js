@@ -91,15 +91,15 @@ const FinancialsvPSSAChart = (props) => {
 
       var financialRegressions = [];
       financialRegressions.push({
-        Name: "TotalExpenditure",
+        Name: "Total Expenditure",
         correlationCoefficient: calculateRegression(totalExpenditureData),
       });
       financialRegressions.push({
-        Name: "WADM",
+        Name: "Personal Income/Market Value per WADM",
         correlationCoefficient: calculateRegression(wadmData),
       });
       financialRegressions.push({
-        Name: "PersonalIncome",
+        Name: "Personal Income",
         correlationCoefficient: calculateRegression(personalIncomeData),
       });
       setFinCorrelations(financialRegressions);
@@ -114,6 +114,7 @@ const FinancialsvPSSAChart = (props) => {
   }, []);
 
   useEffect(() => {
+    setFinData(null);
     processFinancialData();
   }, [finDataUnprocessed, currOption]);
 
@@ -146,6 +147,13 @@ const FinancialsvPSSAChart = (props) => {
     }
 
     return null;
+  };
+
+  const yTickFormatter = (tick) => {
+    if (currOption == options[1]) {
+      return `$${tick}`;
+    }
+    return `$${tick}M`;
   };
 
   return (
@@ -183,19 +191,21 @@ const FinancialsvPSSAChart = (props) => {
               }}
             >
               <CartesianGrid />
-              <XAxis type="number" dataKey="x" name="PSSA_score">
-                <Label
-                  value="PSSA Scores"
-                  offset={-5}
-                  position={"insideBottom"}
-                ></Label>
+              <XAxis
+                type="number"
+                dataKey="x"
+                name="PSSA_score"
+                tickFormatter={xTickFormatter}
+              >
+                <Label value="PSSA Scores" position={"bottom"}></Label>
               </XAxis>
-              <YAxis type="number" dataKey="y" name="financial-data">
-                <Label
-                  value="($)"
-                  offset={-20}
-                  position={"insideBottomLeft"}
-                ></Label>
+              <YAxis
+                type="number"
+                dataKey="y"
+                name="financial-data"
+                tickFormatter={yTickFormatter}
+              >
+                <Label offset={-20} position={"insideTopLeft"} unit="%"></Label>
               </YAxis>
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}
@@ -223,5 +233,9 @@ export function calculateRegression(data) {
 
   return regression.correlationCoefficient;
 }
+
+export const xTickFormatter = (tick) => {
+  return `${tick}%`;
+};
 
 export default FinancialsvPSSAChart;

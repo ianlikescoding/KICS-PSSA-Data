@@ -1,8 +1,9 @@
 .logo{
-    width:200px;
-    height:auto;
-    top: 0;
-    left: 0;
-    justify-content: left;
-    display:grid;
+    height:180px;
+    justify-content: center;
+    aspect-ratio: 142 / 149;
+}
+
+.header-div {
+    margin-bottom: 20px;
 }

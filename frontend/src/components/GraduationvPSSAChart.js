@@ -15,7 +15,7 @@ import {
   Label,
   ResponsiveContainer,
 } from "recharts";
-import { calculateRegression } from "./FinancialsvPSSAChart";
+import { calculateRegression, xTickFormatter } from "./FinancialsvPSSAChart";
 
 const GraduationvPSSAChart = (props) => {
   const setGradCorrelations = props.setGradCorrelations;
@@ -113,19 +113,19 @@ const GraduationvPSSAChart = (props) => {
 
       var gradRegressions = [];
       gradRegressions.push({
-        Name: "GraduationRate",
+        Name: "Graduation Rate",
         correlationCoefficient: calculateRegression(graduationRateData),
       });
       gradRegressions.push({
-        Name: "DropoutRate",
+        Name: "Dropout Rate",
         correlationCoefficient: calculateRegression(dropoutRateData),
       });
       gradRegressions.push({
-        Name: "PPostSecondary",
+        Name: "% Post-Secondary",
         correlationCoefficient: calculateRegression(pPostSecondaryData),
       });
       gradRegressions.push({
-        Name: "PCollegeBound",
+        Name: "% College Bound",
         correlationCoefficient: calculateRegression(pCollegeBoundData),
       });
 
@@ -170,16 +170,24 @@ const GraduationvPSSAChart = (props) => {
               }}
             >
               <CartesianGrid />
-              <XAxis type="number" dataKey="x" name="PSSA_score">
-                <Label value="PSSA Score" offset={-5} position="insideBottom" />
-              </XAxis>
-              <YAxis type="number" dataKey="y" name="graduation-data">
+              <XAxis
+                type="number"
+                dataKey="x"
+                name="PSSA_score"
+                tickFormatter={xTickFormatter}
+              >
                 <Label
-                  value="(%)"
-                  offset={-5}
-                  position={"insideBottomLeft"}
-                ></Label>
-              </YAxis>
+                  value="PSSA Scores"
+                  offset={-20}
+                  position="insideBottom"
+                />
+              </XAxis>
+              <YAxis
+                type="number"
+                dataKey="y"
+                name="graduation-data"
+                tickFormatter={yTickFormatter}
+              ></YAxis>
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}
                 content={<CustomTooltip />}
@@ -207,6 +215,10 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 
   return null;
+};
+
+export const yTickFormatter = (tick) => {
+  return `${tick}%`;
 };
 
 export default GraduationvPSSAChart;

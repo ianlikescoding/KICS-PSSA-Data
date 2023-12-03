@@ -8,7 +8,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
+  Label,
   LineChart,
   Line,
 } from "recharts";
@@ -156,19 +156,25 @@ function AvgPSSAScore() {
         setCurrOption={setCurrOption}
         currOption={currOption || options[0]}
       />
-      <Box>
+      <Box margin={"20px"} padding={"20px"}>
         <h1>Average PSSA Score</h1>
         <LineChart
           width={730}
-          height={250}
+          height={300}
           data={dataSetArray}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          overflow="visible"
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="year" />
-          <YAxis dataKey="score" domain={[0, 100]} />
+          <XAxis dataKey="year">
+            <Label value="Year" offset={5} position="bottom" />
+          </XAxis>
+          <YAxis
+            dataKey="score"
+            domain={[0, 100]}
+            tickFormatter={(tick) => `${tick}%`}
+          />
           <Tooltip />
-          <Legend />
           <Line
             type="monotone"
             dataKey="score"

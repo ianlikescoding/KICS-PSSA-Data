@@ -15,7 +15,8 @@ import {
   Label,
   ResponsiveContainer,
 } from "recharts";
-import { calculateRegression } from "./FinancialsvPSSAChart";
+import { calculateRegression, xTickFormatter } from "./FinancialsvPSSAChart";
+import { Typography } from "@mui/material";
 
 const PersonnelvPSSAChart = (props) => {
   const setPersonnelCorrelations = props.setPersonnelCorrelations;
@@ -101,23 +102,23 @@ const PersonnelvPSSAChart = (props) => {
 
       var personnelRegressions = [];
       personnelRegressions.push({
-        Name: "EdLevel",
+        Name: "Personnel Education Level",
         correlationCoefficient: calculateRegression(edLevelData),
       });
       personnelRegressions.push({
-        Name: "Salary",
+        Name: "Personnel Salary",
         correlationCoefficient: calculateRegression(salaryData),
       });
       personnelRegressions.push({
-        Name: "PFemale",
+        Name: "% Female Personnel",
         correlationCoefficient: calculateRegression(pFemaleData),
       });
       personnelRegressions.push({
-        Name: "PMale",
+        Name: "% Male Personnel",
         correlationCoefficient: calculateRegression(pMaleData),
       });
       personnelRegressions.push({
-        Name: "YearsOfService",
+        Name: "Personnel Years Of Service",
         correlationCoefficient: calculateRegression(yearsOfServiceData),
       });
       setPersonnelCorrelations(personnelRegressions);
@@ -182,63 +183,97 @@ const PersonnelvPSSAChart = (props) => {
     return null;
   };
 
+  const yTickFormatter = (tick) => {
+    if (currOption == options[1]) {
+      return `$${tick}`;
+    } else if (currOption == options[2] || currOption == options[3]) {
+      return `${tick}%`;
+    } else if (currOption == options[4]) {
+      return `${tick} Yr`;
+    }
+
+    return `${tick}`;
+  };
+
   return (
-    <Stack
-      direction="row"
-      spacing={2}
-      alignItems="center"
-      justifyContent={"center"}
-    >
+    <>
       <Stack
-        direction="column"
+        direction="row"
         spacing={2}
         alignItems="center"
         justifyContent={"center"}
       >
-        <CustomizedMenus
-          options={options}
-          setCurrOption={setCurrOption}
-          currOption={currOption}
-        />
+        <Stack
+          direction="column"
+          spacing={2}
+          alignItems="center"
+          justifyContent={"center"}
+        >
+          <CustomizedMenus
+            options={options}
+            setCurrOption={setCurrOption}
+            currOption={currOption}
+          />
+          <Box>
+            <h3>Correlation Coefficient: {currCorrelationNum}</h3>
+          </Box>
+          {currOption == options[0] ? (
+            <Typography fontSize="14px">
+              *Level is denoted by following manner:<br></br>1 - Less than high
+              school graduate,
+              <br />2 - High school graduate,
+              <br />3 - Some college, less than bachelor's degree,
+              <br />4 - Bachelor's degree ,<br></br>5 - Master's degree, 6 -
+              Doctor's degree
+            </Typography>
+          ) : (
+            <></>
+          )}
+        </Stack>
         <Box>
-          <h3>Correlation Coefficient: {currCorrelationNum}</h3>
+          <h1>Personnel Data vs PSSA Score</h1>
+          <ResponsiveContainer width={730} height={400}>
+            {personnelData ? (
+              <ScatterChart
+                margin={{
+                  top: 20,
+                  right: 20,
+                  bottom: 20,
+                  left: 30,
+                }}
+              >
+                <CartesianGrid />
+                <XAxis
+                  type="number"
+                  dataKey="x"
+                  name="PSSA_score"
+                  tickFormatter={xTickFormatter}
+                >
+                  <Label
+                    value="PSSA Scores"
+                    offset={-20}
+                    position="insideBottom"
+                  />
+                </XAxis>
+                <YAxis
+                  type="number"
+                  dataKey="y"
+                  name="personnel-data"
+                  tickFormatter={yTickFormatter}
+                ></YAxis>
+                <Tooltip
+                  cursor={{ strokeDasharray: "3 3" }}
+                  content={<CustomTooltip />}
+                />
+                <Scatter name="gradrate" data={personnelData} fill="#8884d8" />
+              </ScatterChart>
+            ) : (
+              <CircularProgress />
+            )}
+          </ResponsiveContainer>
         </Box>
       </Stack>
-      <Box>
-        <h1>Personnel Data vs PSSA Score</h1>
-        <ResponsiveContainer width={730} height={400}>
-          {personnelData ? (
-            <ScatterChart
-              margin={{
-                top: 20,
-                right: 20,
-                bottom: 20,
-                left: 30,
-              }}
-            >
-              <CartesianGrid />
-              <XAxis type="number" dataKey="x" name="PSSA_score">
-                <Label value="PSSA Score" offset={-5} position="insideBottom" />
-              </XAxis>
-              <YAxis type="number" dataKey="y" name="personnel-data">
-                <Label
-                  value={yAxisLabel}
-                  offset={-15}
-                  position={"insideBottomLeft"}
-                ></Label>
-              </YAxis>
-              <Tooltip
-                cursor={{ strokeDasharray: "3 3" }}
-                content={<CustomTooltip />}
-              />
-              <Scatter name="gradrate" data={personnelData} fill="#8884d8" />
-            </ScatterChart>
-          ) : (
-            <CircularProgress />
-          )}
-        </ResponsiveContainer>
-      </Box>
-    </Stack>
+    </>
   );
 };
 
