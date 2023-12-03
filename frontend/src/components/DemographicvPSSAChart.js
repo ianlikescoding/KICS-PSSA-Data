@@ -240,7 +240,6 @@ const DemographicvPSSAChart = (props) => {
                   position="insideBottom"
                 />
               </XAxis>
-
               <YAxis
                 type="number"
                 dataKey="y"

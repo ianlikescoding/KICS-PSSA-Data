@@ -34,7 +34,6 @@ const PersonnelvPSSAChart = (props) => {
   const [currOption, setCurrOption] = useState(options[0]);
 
   function processPersonnelData() {
-    var currCorrelationNum;
     var test = [];
     var data = [];
     var edLevelData = [];

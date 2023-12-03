@@ -12,7 +12,6 @@ import {
   LineChart,
   Line,
 } from "recharts";
-import { CircularProgress } from "@mui/material";
 
 function AvgPSSAScore() {
   let options = "GETTYSBURG AREA MS";
@@ -67,21 +66,6 @@ function AvgPSSAScore() {
       console.error("Fetch error:", error);
     }
   };
-
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip" backgroundcolor="white">
-          <h3>{`${payload[0].payload.School}`}</h3>
-          <p className="pssascore-label">{`PSSA Score : ${payload[0].value}`}</p>
-          <p className="gradrate-label">{`${currOption}: ${payload[1].value}%`}</p>
-        </div>
-      );
-    }
-
-    return null;
-  };
-
   // creating a dictionary for dropdown menu,
   // When a user picks a specified
   if (!dictionary) {

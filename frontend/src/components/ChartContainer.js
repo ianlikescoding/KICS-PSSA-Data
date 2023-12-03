@@ -1,25 +1,10 @@
 import React, { useState, useEffect } from "react";
-import CustomizedMenus from "./DropDown";
 import "../components/ChartContainer.css";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
 import PropTypes from "prop-types";
-import {
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  PieChart,
-  Pie,
-  ScatterChart,
-  Scatter,
-  LineChart,
-  Line,
-  ResponsiveContainer,
-} from "recharts";
 import AvgChart from "./AvgPSSAScoreChart";
 import FinancialsvPSSAChart from "./FinancialsvPSSAChart";
 import PersonnelvPSSAChart from "./PersonnelvPSSAChart";
@@ -66,8 +51,6 @@ export default function ComplexedGrid(props) {
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      // console.log("payload: ", payload);
-      // console.log("label: ", label);
       return (
         <div className="custom-tooltip" backgroundColor="white">
           <h3>{`${payload[0].payload.name}`}</h3>

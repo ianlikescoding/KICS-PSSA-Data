@@ -34,7 +34,6 @@ const FinancialsvPSSAChart = (props) => {
   }
 
   function processFinancialData() {
-    var currCorrelationNum;
     var test = [];
     var data = [];
     var totalExpenditureData = [];

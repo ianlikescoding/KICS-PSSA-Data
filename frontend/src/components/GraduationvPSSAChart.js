@@ -59,7 +59,6 @@ const GraduationvPSSAChart = (props) => {
     var dropoutRateData = [];
     var pPostSecondaryData = [];
     var pCollegeBoundData = [];
-    var currCorrelationNum;
 
     // Process data once fetched
     if (gradDataUnprocessed) {
