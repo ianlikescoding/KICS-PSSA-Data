@@ -2,25 +2,24 @@
 
 Motivation-
 
-Each year PA students take standarized test to measure school performance. After research we have found that the score of PSSA test have an impact on school fundings from the state. Therefore, we wante to visualize the correlation of favrious factors and PSSA scores. This will not only help people who are planning to go to higher education, but also their gurdians/parents as well to be used as another resource to decide where to send their kids. 
+Each year PA students take standarized test to measure school performance. After research we have found that the score of PSSA test have an impact on school fundings from the state. Therefore, we wante to visualize the correlation of favrious factors and PSSA scores. This will not only help people who are planning to go to higher education, but also their gurdians/parents as well to be used as another resource to decide where to send their kids.
 
 ## Authors
 
 Front-end
+
 - Kizuki Koyasu
 - Sakhi Naik
-Back-end
+  Back-end
 - Cade Killbrde
 - Ian Brown
-
-
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/ianlikescoding/KICS-PSSA-Data.git
 ```
 
 Go to the backend server directory
@@ -54,8 +53,6 @@ Run web-page
 ```bash
 npm start
 ```
-
-
 
 ## Features
 
