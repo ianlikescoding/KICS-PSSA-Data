@@ -144,20 +144,6 @@ export default function ComplexedGrid(props) {
             was divided by 4, and thus we received a number from 0-100.<br></br>
           </Stack>
         </Box>
-        <Box width="100%">
-          <Stack
-            direction="row"
-            spacing={10}
-            alignItems="start"
-            justifyContent="start"
-          >
-            <br></br>
-            *Level is denoted by following manner:<br></br>1 - Less than high
-            school graduate, 2 - High school graduate, 3 - Some college, less
-            than bachelor's degree, 4 - Bachelor's degree ,<br></br>5 - Master's
-            degree, 6 - Doctor's degree
-          </Stack>
-        </Box>
       </Paper>
     </Container>
   );
