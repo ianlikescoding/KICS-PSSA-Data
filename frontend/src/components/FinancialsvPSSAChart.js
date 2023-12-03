@@ -194,7 +194,7 @@ const FinancialsvPSSAChart = (props) => {
                 <Label
                   value="($)"
                   offset={-20}
-                  position={"insideTopLeft"}
+                  position={"insideBottomLeft"}
                 ></Label>
               </YAxis>
               <Tooltip

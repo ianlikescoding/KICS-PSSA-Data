@@ -23,6 +23,8 @@ const PersonnelvPSSAChart = (props) => {
   const [personnelDataUnprocessed, setPersonnelDataUnprocessed] =
     useState(null);
   const [personnelData, setPersonnelData] = useState(null);
+  const [yAxisLabel, setYAxisLabel] = useState(null);
+
   const options = [
     "Education Level",
     "Salary",
@@ -131,6 +133,15 @@ const PersonnelvPSSAChart = (props) => {
 
   useEffect(() => {
     processPersonnelData();
+    if (currOption == options[0]) {
+      setYAxisLabel("(*Level)");
+    } else if (currOption == options[1]) {
+      setYAxisLabel("($)");
+    } else if (currOption == options[4]) {
+      setYAxisLabel("(Years)");
+    } else {
+      setYAxisLabel("(%)");
+    }
   }, [personnelDataUnprocessed, currOption]);
 
   async function fetchPersonnelData() {
@@ -211,9 +222,9 @@ const PersonnelvPSSAChart = (props) => {
               </XAxis>
               <YAxis type="number" dataKey="y" name="personnel-data">
                 <Label
-                  value="(%)"
-                  offset={-5}
-                  position={"insideTopLeft"}
+                  value={yAxisLabel}
+                  offset={-15}
+                  position={"insideBottomLeft"}
                 ></Label>
               </YAxis>
               <Tooltip

@@ -36,13 +36,13 @@ Install dependencies
   npm install
 ```
 
-Start the server
+Start the server, keep it open in a terminal window
 
 ```bash
   node server.js
 ```
 
-Move to frontend directory
+Create new terminal window, move to frontend directory
 
 ```bash
     cd ..

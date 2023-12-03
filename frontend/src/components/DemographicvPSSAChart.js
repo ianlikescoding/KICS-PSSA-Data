@@ -233,7 +233,7 @@ const DemographicvPSSAChart = (props) => {
               </XAxis>
 
               <YAxis type="number" dataKey="y" name={yAxisLabel}>
-                <Label value="(%)" offset={-5} position={"insideTopLeft"}></Label>
+                <Label value="(%)" offset={-5} position={"insideBottomLeft"}></Label>
               </YAxis>
               <Tooltip
                 cursor={{ strokeDasharray: "3 3" }}

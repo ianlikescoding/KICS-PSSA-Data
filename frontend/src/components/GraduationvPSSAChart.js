@@ -177,7 +177,7 @@ const GraduationvPSSAChart = (props) => {
                 <Label
                   value="(%)"
                   offset={-5}
-                  position={"insideTopLeft"}
+                  position={"insideBottomLeft"}
                 ></Label>
               </YAxis>
               <Tooltip

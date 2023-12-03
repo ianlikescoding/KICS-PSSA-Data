@@ -121,6 +121,44 @@ export default function ComplexedGrid(props) {
           </Stack>
         </Box>
       </Paper>
+      <Paper
+        sx={{
+          p: 2,
+          margin: "auto",
+          width: 1000,
+          flexGrow: 1,
+          marginTop: 5,
+          marginBottom: 10,
+          justifyContent: "center",
+          display: "grid",
+          backgroundColor: (theme) =>
+            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+        }}
+      >
+        <Box width="100%">
+          <Stack direction="row" spacing={10} alignItems="center">
+            Note: PSSA Scores are calculated via a weighted average. There are 4
+            possible PSSA scores: “Below Basic”, “Basic”, “Proficient”, and
+            “Advanced”. These scores were considered on a scale between 1-4, and
+            then multiplied by 1-4 depending on the score. The resulting number
+            was divided by 4, and thus we received a number from 0-100.<br></br>
+          </Stack>
+        </Box>
+        <Box width="100%">
+          <Stack
+            direction="row"
+            spacing={10}
+            alignItems="start"
+            justifyContent="start"
+          >
+            <br></br>
+            *Level is denoted by following manner:<br></br>1 - Less than high
+            school graduate, 2 - High school graduate, 3 - Some college, less
+            than bachelor's degree, 4 - Bachelor's degree ,<br></br>5 - Master's
+            degree, 6 - Doctor's degree
+          </Stack>
+        </Box>
+      </Paper>
     </Container>
   );
 }
