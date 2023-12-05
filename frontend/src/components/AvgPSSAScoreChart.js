@@ -91,7 +91,9 @@ function AvgPSSAScore() {
   }
 
   // Convert the Set to an array for options
-  options = Array.from(uniqueSchoolNames);
+  options = Array.from(uniqueSchoolNames).sort((a, b) => {
+    return a.localeCompare(b);
+  });
 
   if (!data) {
     return null;
